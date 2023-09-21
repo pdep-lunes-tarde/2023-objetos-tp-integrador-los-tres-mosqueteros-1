@@ -1,5 +1,6 @@
 import wollok.game.*
 import personaje.*
+import obstaculos.*
 
 object tpIntegrador {
 	
@@ -11,9 +12,12 @@ object tpIntegrador {
 	
 	method jugar() {
 		self.inicializarPantalla()
-		game.addVisualCharacter(player) // Para que el personajes se mueva con las flechitas
+		game.addVisualCharacter(escopetero) // Para que el personajes se mueva con las flechitas
 		game.addVisual(obstaculo)
-		game.whenCollideDo(player, {objeto => objeto.colision()}) //Cuando el jugador esta en la misma posiion que el objeto, ocurre algo(en este caso el arbusto se desplaza, cosa que no queremos) 
+		game.whenCollideDo(escopetero, {objeto => objeto.colision()}) //Cuando el jugador esta en la misma posiion que el objeto, ocurre algo(en este caso el arbusto se desplaza, cosa que no queremos)
+		
+		keyboard.d().onPressDo{escopetero.disparar()}
+		 
 		game.start()
 	}
 }

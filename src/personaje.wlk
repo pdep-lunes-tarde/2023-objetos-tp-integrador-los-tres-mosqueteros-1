@@ -1,42 +1,46 @@
 import wollok.game.*
+import armas.*
+import balas.*
+import habilidades.*
+import pasivas.*
 
-object player {
+// quite por ahora las idead de objetos y revivir, 
+// estaba pensando muchas cosas y pense dejarlo mas para el final de ultima
+
+class Personaje {
 	var vida
 	var arma
-	var objeto
-	var pasivas = new List()
-	var revivir = false
+	var habilidad
+	var pasiva
 	
+	var property direccion = 2
 	var property position = game.origin()	
+	
+	method direccion () = direccion
+	method posicion () = position
 	
 	method empezarCentrado(){
 		position = game.center()
 	}
 	
-	method image() = "mario.png"
-	
-	method atacar () {}
-	
-	method cambiarVida () {}
-		
 	method caminar () {}
 	
-	method habilidad () {}
+	method image() = "mario.png"
 	
-	method cambiarObjeto () {}
+	method disparar () {
+		arma.disparar(self)
+	}
 	
-	method agregarPasiva () {}
-		
-	method cumplirDesafio () {}
+	method cambiarVida (valor) {
+		vida += valor
+	}
 	
-	method morir () {}
+	method habilidad () {
+		habilidad.lanzar(self)
+	}
 	
 }
 
-object obstaculo{ //mover a otro archivo llamado "obstaculos", en el momento no pude hacerlo
-	var property position = game.center()
-	method image()= "arbusto.png"
-	
-	method colision(){position = position.up(1)} //colision (anda mal)
-	
-}
+const escopetero = new Personaje (vida = 20,arma = escopeta,habilidad = trampa,pasiva = roboDeVida)
+const franco = new Personaje (vida = 15,arma = francotirador,habilidad = red,pasiva = multiplicadorDeDanio)
+const ingeniero = new Personaje (vida = 10,arma = pistola,habilidad = granada,pasiva = mejoraDeArma)

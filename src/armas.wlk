@@ -1,14 +1,18 @@
-object arma1 {
+import balas.*
+
+class Arma {
+	var tipoMunicion
 	
+	method disparar (pj) {
+		tipoMunicion.viajar(pj)
+	}
 	
 }
 
-object arma2 {
-	
-	
-}
+const escopeta = new Arma (tipoMunicion = cartucho)
+const francotirador = new Arma (tipoMunicion = calibreFranco)
 
-object arma3 {
-	
-	
-}
+const pistola = new Arma (tipoMunicion = calibreComun)
+const subfusil = new Arma (tipoMunicion = calibreSubfu)
+const ak = new Arma (tipoMunicion = calibreAk)
+const ligera = new Arma (tipoMunicion = calibreLigero)
