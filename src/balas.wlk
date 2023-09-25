@@ -2,46 +2,72 @@ import wollok.game.*
 
 object cartucho {
 	
+	var property direccion
 	var property position
+	const property rango = 5
+	
+	method spawn (pj) {
+		direccion = pj.direction()
+		position = direccion.siguientePosicion(pj)
+		game.addVisual(self)
+		self.viajar(pj)
+	}
 	
 	method viajar (pj) {
-		game.addVisual(self)
-		position = pj.posicion()
-		position = position.right(5)
+		//terminar de implementar el rango como un contador para ahorrar onticks
+		game.onTick(100,"viajeBala",{position = direccion.siguientePosicion(self)})
+		if(game.hasVisual(self)){game.onTick(600,"removerBala",{self.borrarBala()})}
+	}
+	
+	method borrarBala () {
+		game.removeTickEvent("viajeBala")
+		game.removeTickEvent("removerBala")
+		game.removeVisual(self)
 	}
 	
 	method image () = "bala.png"
 	
 }
 
-object calibreFranco {
-	
-	method image () {}
-	
-}
 
-object calibreComun {
+object viajeBala {
 	
-	method image () {}
-	
-}
-
-object calibreSubfu {
-	
-	method image () {}
-	
-}
-
-object calibreAk {
-	
-	method image () {}
-	
-}
-
-object calibreLigero {
-	
-	method image () {
+	method apply () {
 		
 	}
 	
 }
+
+
+
+//object calibreFranco {
+	
+	//method image () {}
+	
+//}
+
+//object calibreComun {
+	
+//	method image () {}
+//	
+//}
+//
+//object calibreSubfu {
+//	
+//	method image () {}
+//	
+//}
+//
+//object calibreAk {
+//	
+//	method image () {}
+//	
+//}
+//
+//object calibreLigero {
+//	
+//	method image () {
+//		
+//	}
+//	
+//}

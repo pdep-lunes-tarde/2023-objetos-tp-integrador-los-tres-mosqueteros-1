@@ -1,18 +1,18 @@
 import balas.*
 
 class Arma {
-	var tipoMunicion
+	var property tipoMunicion
 	
 	method disparar (pj) {
-		tipoMunicion.viajar(pj)
+		tipoMunicion.spawn(pj)
 	}
 	
 }
 
 const escopeta = new Arma (tipoMunicion = cartucho)
-const francotirador = new Arma (tipoMunicion = calibreFranco)
-
-const pistola = new Arma (tipoMunicion = calibreComun)
-const subfusil = new Arma (tipoMunicion = calibreSubfu)
-const ak = new Arma (tipoMunicion = calibreAk)
-const ligera = new Arma (tipoMunicion = calibreLigero)
+//const francotirador = new Arma (tipoMunicion = calibreFranco)
+//
+//const pistola = new Arma (tipoMunicion = calibreComun)
+//const subfusil = new Arma (tipoMunicion = calibreSubfu)
+//const ak = new Arma (tipoMunicion = calibreAk)
+//const ligera = new Arma (tipoMunicion = calibreLigero)
