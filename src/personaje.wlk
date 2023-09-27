@@ -40,5 +40,5 @@ class Personaje {
 }
 
 const escopetero = new Personaje (vida = 20,arma = escopeta,laHabilidad = trampa,pasiva = roboDeVida,imagen="mario.png")
-const franco = new Personaje (vida = 15,arma = francotirador,laHabilidad = trampa,pasiva = roboDeVida,imagen="ejemploDos.png")
-const ingeniero = new Personaje (vida = 10,arma = pistola,laHabilidad = trampa,pasiva = roboDeVida,imagen="ejemploUno.png")
+const franco = new Personaje (vida = 15,arma = francotirador,laHabilidad = trampa,pasiva = roboDeVida,imagen="pibe.png")
+const ingeniero = new Personaje (vida = 10,arma = pistola,laHabilidad = trampa,pasiva = roboDeVida,imagen="pibito.png")
