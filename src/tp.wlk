@@ -4,8 +4,11 @@ import obstaculos.*
 import armas.*
 import balas.*
 import direcciones.*
+import menu.*
 
 object tpIntegrador {
+	
+	var personajeElegido
 	
 	method inicializarPantalla(){
 		game.width(20)
@@ -15,27 +18,35 @@ object tpIntegrador {
 	
 	method menu() {
 		self.inicializarPantalla()
-		//añadir visuales de los personajes
-		//crear objeto manito que elege para visualizar cual estoy eligiendo
-		//mover con las flechtias la eleccion
-		//enter tiene que elegir ese personaje borrando el menu e inicializando el method jugar
+		game.addVisual(escopetero)
+		game.addVisualIn(franco,game.at(8,8))
+		game.addVisualIn(ingeniero,game.at(12,12))
+
+		var seleccion = 0
+		keyboard.right().onPressDo{seleccion = 2.min(seleccion+1)}
+		keyboard.left().onPressDo{seleccion = 0.max(seleccion-1)}
 		
+		
+		keyboard.enter().onPressDo{personajeElegido = eleccion.seleccion(seleccion)}
+		keyboard.enter().onPressDo{self.jugar()}
+		
+		game.start()
 	}
 	
 	method jugar() {
-		self.inicializarPantalla()
-		game.addVisualCharacter(escopetero) // Para que el personajes se mueva con las flechitas
+
+		game.clear()
+		game.addVisualCharacter(personajeElegido) 
 		game.addVisual(obstaculo)
-		//game.whenCollideDo(escopetero, {objeto => objeto.colision()}) //Cuando el jugador esta en la misma posiion que el objeto, ocurre algo(en este caso el arbusto se desplaza, cosa que no queremos)
 		
-		keyboard.d().onPressDo{escopetero.disparar()}
-//		if (game.hasVisual(escopetero.arma().tipoMunicion())){game.onTick(1000,"viajeBala",{escopetero.arma().tipoMunicion().viajar()})}
+		
+		keyboard.d().onPressDo{personajeElegido.disparar()}
+
+		keyboard.up().onPressDo{personajeElegido.direction(norte)}
+		keyboard.down().onPressDo{personajeElegido.direction(sur)}
+		keyboard.right().onPressDo{personajeElegido.direction(este)}
+		keyboard.left().onPressDo{personajeElegido.direction(oeste)}
 		 
-		keyboard.up().onPressDo{escopetero.direction(norte)}
-		keyboard.down().onPressDo{escopetero.direction(sur)}
-		keyboard.right().onPressDo{escopetero.direction(este)}
-		keyboard.left().onPressDo{escopetero.direction(oeste)}
-		 
-		game.start()
+
 	}
 }

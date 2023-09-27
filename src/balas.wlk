@@ -1,10 +1,13 @@
 import wollok.game.*
+import direcciones.*
+import personaje.*
 
-object cartucho {
+class Bala {
 	
-	var property direccion
-	var property position
-	const property rango = 5
+	var property direccion = sur
+	var property position = game.origin()
+	const property rango 
+	const imagen
 	
 	method spawn (pj) {
 		direccion = pj.direction()
@@ -14,60 +17,19 @@ object cartucho {
 	}
 	
 	method viajar (pj) {
-		//terminar de implementar el rango como un contador para ahorrar onticks
 		game.onTick(100,"viajeBala",{position = direccion.siguientePosicion(self)})
-		if(game.hasVisual(self)){game.onTick(600,"removerBala",{self.borrarBala()})}
+		if(game.hasVisual(self)){game.schedule(100*rango+1,{self.borrarBala()})}
 	}
 	
 	method borrarBala () {
 		game.removeTickEvent("viajeBala")
-		game.removeTickEvent("removerBala")
 		game.removeVisual(self)
 	}
 	
-	method image () = "bala.png"
+	method image () = imagen
 	
 }
 
-
-object viajeBala {
-	
-	method apply () {
-		
-	}
-	
-}
-
-
-
-//object calibreFranco {
-	
-	//method image () {}
-	
-//}
-
-//object calibreComun {
-	
-//	method image () {}
-//	
-//}
-//
-//object calibreSubfu {
-//	
-//	method image () {}
-//	
-//}
-//
-//object calibreAk {
-//	
-//	method image () {}
-//	
-//}
-//
-//object calibreLigero {
-//	
-//	method image () {
-//		
-//	}
-//	
-//}
+const cartucho = new Bala (rango=5,imagen="bala.png")
+const calibreFranco = new Bala (rango=100,imagen="manzana.png")
+const calibreComun = new Bala (rango=7,imagen="bala.png")

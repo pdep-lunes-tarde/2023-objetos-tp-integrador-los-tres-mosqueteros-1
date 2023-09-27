@@ -4,13 +4,12 @@ import balas.*
 import habilidades.*
 import pasivas.*
 import direcciones.*
-// quite por ahora las idead de objetos y revivir, 
-// estaba pensando muchas cosas y pense dejarlo mas para el final de ultima
 
 class Personaje {
 	var vida
 	var property arma
 	var laHabilidad
+	var imagen 
 	var pasiva
 	
 	var property direction = sur
@@ -24,7 +23,7 @@ class Personaje {
 	
 	method caminar () {}
 	
-	method image() = "mario.png"
+	method image() = imagen
 	
 	method disparar () {
 		arma.disparar(self)
@@ -40,6 +39,6 @@ class Personaje {
 	
 }
 
-const escopetero = new Personaje (vida = 20,arma = escopeta,laHabilidad = trampa,pasiva = roboDeVida)
-//const franco = new Personaje (vida = 15,arma = francotirador,habilidad = red,pasiva = multiplicadorDeDanio)
-//const ingeniero = new Personaje (vida = 10,arma = pistola,habilidad = granada,pasiva = mejoraDeArma)
+const escopetero = new Personaje (vida = 20,arma = escopeta,laHabilidad = trampa,pasiva = roboDeVida,imagen="mario.png")
+const franco = new Personaje (vida = 15,arma = francotirador,laHabilidad = trampa,pasiva = roboDeVida,imagen="ejemploDos.png")
+const ingeniero = new Personaje (vida = 10,arma = pistola,laHabilidad = trampa,pasiva = roboDeVida,imagen="ejemploUno.png")
