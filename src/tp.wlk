@@ -8,7 +8,19 @@ import menu.*
 
 object tpIntegrador {
 	
+	const  property balasEnPantalla = new List()
 	var personajeElegido
+	
+	method agregarBala (bala) {
+		if (balasEnPantalla.size()<4){
+		balasEnPantalla.add(bala)
+		}
+		else {game.say(personajeElegido,"aun no")}
+	}
+	
+	method sacarBala (bala) {
+		balasEnPantalla.remove(bala)
+	}
 	
 	method inicializarPantalla(){
 		game.width(20)
@@ -39,14 +51,12 @@ object tpIntegrador {
 		game.addVisualCharacter(personajeElegido) 
 		game.addVisual(obstaculo)
 		
-		
 		keyboard.d().onPressDo{personajeElegido.disparar()}
-
 		keyboard.up().onPressDo{personajeElegido.direction(norte)}
 		keyboard.down().onPressDo{personajeElegido.direction(sur)}
 		keyboard.right().onPressDo{personajeElegido.direction(este)}
 		keyboard.left().onPressDo{personajeElegido.direction(oeste)}
 		 
-
+		game.onTick(100,"dispararBala",{balasEnPantalla.forEach{x => x.viajar(personajeElegido)}})
 	}
 }

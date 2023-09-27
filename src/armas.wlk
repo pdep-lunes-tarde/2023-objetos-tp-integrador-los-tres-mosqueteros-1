@@ -1,10 +1,11 @@
 import balas.*
 
 class Arma {
-	var property tipoMunicion
+	const property tipoMunicion
 	
 	method disparar (pj) {
-		tipoMunicion.spawn(pj)
+		const balaDisparada = new Bala (imagen=tipoMunicion.imagen(),rango=tipoMunicion.rango())
+		balaDisparada.spawn(pj)
 	}
 	
 }

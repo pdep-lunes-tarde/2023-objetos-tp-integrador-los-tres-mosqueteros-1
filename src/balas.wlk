@@ -1,28 +1,36 @@
 import wollok.game.*
 import direcciones.*
 import personaje.*
+import tp.*
 
 class Bala {
 	
 	var property direccion = sur
 	var property position = game.origin()
-	const property rango 
-	const imagen
+	var property rango 
+	const property imagen
 	
 	method spawn (pj) {
 		direccion = pj.direction()
 		position = direccion.siguientePosicion(pj)
 		game.addVisual(self)
-		self.viajar(pj)
+//		self.viajar(pj)
+		tpIntegrador.agregarBala(self)
 	}
 	
 	method viajar (pj) {
-		game.onTick(100,"viajeBala",{position = direccion.siguientePosicion(self)})
-		if(game.hasVisual(self)){game.schedule(100*rango+1,{self.borrarBala()})}
+//		game.onTick(100,"viajeBala",{position = direccion.siguientePosicion(self)})
+//		if(game.hasVisual(self)){game.schedule(100*rango+1,{self.borrarBala()})}
+		if (rango>0){
+			position = direccion.siguientePosicion(self)
+			rango --
+		}
+		else {self.borrarBala()}
 	}
 	
 	method borrarBala () {
-		game.removeTickEvent("viajeBala")
+//		game.removeTickEvent("viajeBala")
+		tpIntegrador.sacarBala(self)
 		game.removeVisual(self)
 	}
 	
