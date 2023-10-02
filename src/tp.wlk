@@ -12,10 +12,7 @@ object tpIntegrador {
 	var personajeElegido
 	
 	method agregarBala (bala) {
-		if (balasEnPantalla.size()<4){
 		balasEnPantalla.add(bala)
-		}
-		else {game.say(personajeElegido,"aun no")}
 	}
 	
 	method sacarBala (bala) {
@@ -36,13 +33,13 @@ object tpIntegrador {
 
 		var seleccion = 0
 		keyboard.right().onPressDo{seleccion = 2.min(seleccion+1)}
+		
 		keyboard.left().onPressDo{seleccion = 0.max(seleccion-1)}
 		
 		
 		keyboard.enter().onPressDo{personajeElegido = eleccion.seleccion(seleccion)}
 		keyboard.enter().onPressDo{self.jugar()}
 		
-		game.start()
 	}
 	
 	method jugar() {
@@ -51,11 +48,12 @@ object tpIntegrador {
 		game.addVisualCharacter(personajeElegido) 
 		game.addVisual(obstaculo)
 		
-		keyboard.d().onPressDo{personajeElegido.disparar()}
+		keyboard.z().onPressDo{personajeElegido.disparar()}
 		keyboard.up().onPressDo{personajeElegido.direction(norte)}
 		keyboard.down().onPressDo{personajeElegido.direction(sur)}
 		keyboard.right().onPressDo{personajeElegido.direction(este)}
 		keyboard.left().onPressDo{personajeElegido.direction(oeste)}
+		keyboard.x().onPressDo{personajeElegido.lanzarHabilidad()}
 		 
 		game.onTick(100,"dispararBala",{balasEnPantalla.forEach{x => x.viajar(personajeElegido)}})
 	}
