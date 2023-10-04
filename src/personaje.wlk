@@ -8,18 +8,24 @@ import tp.*
 
 class Personaje {
 	var property vida
-	const vidaInicial = vida
 	var property arma
-	const armaInicial = arma
-	var property laHabilidad
-	const habilidadInicial = laHabilidad
-	var imagen 
+	var property habilidad
 	var pasiva
+	
+	var property habilidadEnCd = false
+	var cooldownHabilidad
+	
+	const vidaInicial = vida
+	const armaInicial = arma
+	const habilidadInicial = habilidad	
+	
+	var property imagenDerecha
+	var property imagenIzquierda
+	var property imagenMenu 
+	var property imagen = imagenMenu
 	
 	var property direction = sur
 	var property position = game.origin()	
-	
-	method posicion () = position
 
 	method image() = imagen
 	
@@ -44,7 +50,7 @@ class Personaje {
 	
 	method resetearValores () {
 		arma = armaInicial
-		laHabilidad = habilidadInicial
+		habilidad = habilidadInicial
 		vida = vidaInicial
 	}
 	
@@ -53,12 +59,19 @@ class Personaje {
 	}
 	
 	method lanzarHabilidad () {
-		laHabilidad.lanzar(self)
+		if(not habilidadEnCd){
+			habilidad.lanzar(self)
+			self.habilidadEnCd(true)
+			game.schedule(1000*cooldownHabilidad,{self.habilidadEnCd(false)})
+		}
+		else{
+			game.say(self,"aun no")
+		}
+		
 	}
 	
 }
 
-// Sacar el new trampa cuando creas el personaje y crear la trampa al lanzar la habilidad y despues en el tp hacer una lista de trampas y que vaya preguntando hace cuanto esta
-const escopetero = new Personaje (vida = 20,arma = escopeta,laHabilidad = new Trampa(cooldown=10),pasiva = roboDeVida,imagen="mario.png")
-const franco = new Personaje (vida = 15,arma = francotirador,laHabilidad = new Trampa(cooldown=10),pasiva = roboDeVida,imagen="pibe.png")
-const ingeniero = new Personaje (vida = 10,arma = pistola,laHabilidad = new Trampa(cooldown=10),pasiva = roboDeVida,imagen="pibito.png")
+const escopetero = new Personaje (vida = 20,arma = escopeta,habilidad = new Trampa(),cooldownHabilidad = 10,pasiva = roboDeVida,imagenDerecha="escopetero derecha.png",imagenIzquierda="escopetero izquierda.png",imagenMenu="escopetero menu1.png")
+const franco = new Personaje (vida = 15,arma = francotirador,habilidad = new Trampa(),cooldownHabilidad = 10,pasiva = roboDeVida,imagenDerecha="sniper chiquito.png",imagenIzquierda="sniper izquierda.png",imagenMenu="sniper.png")
+const ingeniero = new Personaje (vida = 10,arma = pistola,habilidad = new Trampa(),cooldownHabilidad = 10,pasiva = roboDeVida,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")

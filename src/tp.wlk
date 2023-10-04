@@ -20,16 +20,17 @@ object tpIntegrador {
 	}
 	
 	method inicializarPantalla(){
-		game.width(20)
-		game.height(20)
-		game.cellSize(30)
+		game.width(30)
+		game.height(18)
+		game.cellSize(40)
 	}
 	
 	method menu() {
 		self.inicializarPantalla()
-		game.addVisual(escopetero)
-		game.addVisualIn(franco,game.at(8,8))
-		game.addVisualIn(ingeniero,game.at(12,12))
+		game.boardGround("fondoachicado.png")
+		game.addVisualIn(escopetero,game.at(2,10))
+		game.addVisualIn(franco,game.at(12,10))
+		game.addVisualIn(ingeniero,game.at(22,10))
 
 		var seleccion = 0
 		keyboard.right().onPressDo{seleccion = 2.min(seleccion+1)}
@@ -37,8 +38,7 @@ object tpIntegrador {
 		keyboard.left().onPressDo{seleccion = 0.max(seleccion-1)}
 		
 		
-		keyboard.enter().onPressDo{personajeElegido = eleccion.seleccion(seleccion)}
-		keyboard.enter().onPressDo{self.jugar()}
+		keyboard.enter().onPressDo{personajeElegido = eleccion.seleccion(seleccion) personajeElegido.imagen(personajeElegido.imagenDerecha()) self.jugar()}
 		
 	}
 	
@@ -51,8 +51,8 @@ object tpIntegrador {
 		keyboard.z().onPressDo{personajeElegido.disparar()}
 		keyboard.up().onPressDo{personajeElegido.direction(norte)}
 		keyboard.down().onPressDo{personajeElegido.direction(sur)}
-		keyboard.right().onPressDo{personajeElegido.direction(este)}
-		keyboard.left().onPressDo{personajeElegido.direction(oeste)}
+		keyboard.right().onPressDo{personajeElegido.direction(este) personajeElegido.imagen(personajeElegido.imagenDerecha())}
+		keyboard.left().onPressDo{personajeElegido.direction(oeste) personajeElegido.imagen(personajeElegido.imagenIzquierda())}
 		keyboard.x().onPressDo{personajeElegido.lanzarHabilidad()}
 		 
 		game.onTick(100,"dispararBala",{balasEnPantalla.forEach{x => x.viajar(personajeElegido)}})

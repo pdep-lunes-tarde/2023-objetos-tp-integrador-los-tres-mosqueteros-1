@@ -8,19 +8,35 @@ class Bala {
 	var property direccion = sur
 	var property position = game.origin()
 	var property rango 
-	const property imagen
+	var property imagen
 	
 	method spawn (pj) {
 		direccion = pj.direction()
 		position = direccion.siguientePosicion(pj)
-		game.addVisual(self)
-//		self.viajar(pj)
+		self.agregarImagen()
 		tpIntegrador.agregarBala(self)
 	}
 	
+	method agregarImagen (){
+		if(direccion==sur){
+			imagen = "balaabajo.png"
+			game.addVisual(self)
+		}
+		if(direccion==norte){
+			imagen = "balaarriba.png"
+			game.addVisual(self)
+		}
+		if(direccion==oeste){
+			imagen = "balaizquierda.png"
+			game.addVisual(self)
+		}
+		if(direccion==este){
+			imagen = "bala.png"
+			game.addVisual(self)	
+		}
+	}
+	
 	method viajar (pj) {
-//		game.onTick(100,"viajeBala",{position = direccion.siguientePosicion(self)})
-//		if(game.hasVisual(self)){game.schedule(100*rango+1,{self.borrarBala()})}
 		if (rango>0){
 			position = direccion.siguientePosicion(self)
 			rango --
@@ -29,7 +45,6 @@ class Bala {
 	}
 	
 	method borrarBala () {
-//		game.removeTickEvent("viajeBala")
 		tpIntegrador.sacarBala(self)
 		game.removeVisual(self)
 	}
