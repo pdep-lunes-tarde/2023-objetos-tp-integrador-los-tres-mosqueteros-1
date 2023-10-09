@@ -5,6 +5,7 @@ import habilidades.*
 import pasivas.*
 import direcciones.*
 import tp.*
+import obstaculos.*
 
 class Personaje {
 	var property vida
@@ -29,7 +30,10 @@ class Personaje {
 
 	method image() = imagen
 	
-	method siguientePosicion() = direction.siguientePosicion(self)
+	method siguientePosicion(){ 
+		return direction.siguientePosicion(self)	
+	}
+	
 	
 	method correr(dir){
 		direction = dir

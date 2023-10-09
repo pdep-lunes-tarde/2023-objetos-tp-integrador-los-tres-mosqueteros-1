@@ -52,7 +52,7 @@ object tpIntegrador {
 		keyboard.down().onPressDo{personajeElegido.correr(sur)}
 		keyboard.right().onPressDo{personajeElegido.correr(este)}
 		keyboard.left().onPressDo{personajeElegido.correr(oeste)}
-		
+				
 		keyboard.z().onPressDo{personajeElegido.disparar()}
 		keyboard.up().onPressDo{personajeElegido.direction(norte)}
 		keyboard.down().onPressDo{personajeElegido.direction(sur)}
