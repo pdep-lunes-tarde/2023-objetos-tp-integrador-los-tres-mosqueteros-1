@@ -45,8 +45,13 @@ object tpIntegrador {
 	method jugar() {
 
 		game.clear()
-		game.addVisualCharacter(personajeElegido) 
+		game.addVisual(personajeElegido) 
 		game.addVisual(obstaculo)
+		
+		keyboard.up().onPressDo{personajeElegido.correr(norte)}
+		keyboard.down().onPressDo{personajeElegido.correr(sur)}
+		keyboard.right().onPressDo{personajeElegido.correr(este)}
+		keyboard.left().onPressDo{personajeElegido.correr(oeste)}
 		
 		keyboard.z().onPressDo{personajeElegido.disparar()}
 		keyboard.up().onPressDo{personajeElegido.direction(norte)}

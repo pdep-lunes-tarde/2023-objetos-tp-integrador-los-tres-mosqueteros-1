@@ -1,15 +1,9 @@
 object sur {
-	
 	var property position
-	
 	method siguientePosicion (objeto) {
-		
 		position = objeto.position()
 		return position.down(1)
-		
-		}
-		
-	
+		}	
 }
 
 object norte {

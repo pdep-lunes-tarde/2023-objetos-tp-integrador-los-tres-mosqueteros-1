@@ -29,6 +29,13 @@ class Personaje {
 
 	method image() = imagen
 	
+	method siguientePosicion() = direction.siguientePosicion(self)
+	
+	method correr(dir){
+		direction = dir
+		position = self.siguientePosicion()
+	}
+	
 	method disparar () {
 		arma.disparar(self)
 	}
