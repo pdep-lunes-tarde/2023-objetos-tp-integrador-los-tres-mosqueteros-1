@@ -30,10 +30,13 @@ class Trampa {
 	}
 	 
 }
-
-object granada {
-	
-}
+//class Granada {
+//	const distancia = 7
+//	
+//	method lanzar (pj) {
+//		
+//	}
+//}
 
 object red {
 	
