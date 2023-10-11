@@ -65,7 +65,10 @@ object tpIntegrador {
 		game.onTick(2000,"pasar de ronda",{
 			if (enemigosEnPantalla.isEmpty() && enemigos.isEmpty()){
 				selector += 1
-				enemigos = self.elegirOleada()
+				if (selector < 3){
+					enemigos = self.elegirOleada()
+				}
+				else {game.say(personajeElegido,"Ganeeeee")}
 			}
 		})		
 		

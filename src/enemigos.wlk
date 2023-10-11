@@ -59,7 +59,7 @@ class Enemigo inherits Direccion {
 
 const zombieUno = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png")
 const zombieDos = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieDosChiquito.png")
-const zombieTres = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png")
+const zombieTres = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieTresChiquito.png")
 const zombieCuatro = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png")
 const zombieCinco = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png")
 const zombieSeis = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png")
