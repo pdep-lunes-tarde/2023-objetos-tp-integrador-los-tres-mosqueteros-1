@@ -8,6 +8,7 @@ import menu.*
 import enemigos.*
 
 object tpIntegrador {
+	var property enemigosEnPantalla = []
 	var selector = 0
 	const oleadas = [oleadaUno,oleadaDos,oleadaTres]
 	const  property balasEnPantalla = new List()
@@ -47,19 +48,21 @@ object tpIntegrador {
 	method jugar() {
 
 		var enemigos = self.elegirOleada()
-		var enemigosEnPantalla = []
+
 
 		game.clear()
 		game.addVisual(personajeElegido) 
-//		game.addVisual(obstaculo)
+		game.addVisual(obstaculo)
 		game.onTick(2000,"spawn enemigo",{
 			if (not enemigos.isEmpty()){
 			enemigos.first().spawn()  enemigosEnPantalla.add(enemigos.first())   enemigos.remove(enemigos.first())
-			game.schedule(10000,{enemigosEnPantalla.forEach({x => x.borrar()}) enemigosEnPantalla = []})
 			}
 		})
-		game.onTick(500,"enemigo persigue",{enemigosEnPantalla.forEach({x => x.perseguir(personajeElegido)})})
-		game.onTick(100,"pasar de ronda",{
+		game.onTick(500,"enemigo persigue",{
+			if (not enemigosEnPantalla.isEmpty()){
+				enemigosEnPantalla.forEach({x => x.perseguir(personajeElegido)})
+		}})
+		game.onTick(2000,"pasar de ronda",{
 			if (enemigosEnPantalla.isEmpty() && enemigos.isEmpty()){
 				selector += 1
 				enemigos = self.elegirOleada()
@@ -77,8 +80,8 @@ object tpIntegrador {
 		keyboard.right().onPressDo{personajeElegido.direction(este) personajeElegido.imagen(personajeElegido.imagenDerecha())}
 		keyboard.left().onPressDo{personajeElegido.direction(oeste) personajeElegido.imagen(personajeElegido.imagenIzquierda())}
 		keyboard.x().onPressDo{personajeElegido.lanzarHabilidad()}
-		 
-		game.onTick(100,"dispararBala",{balasEnPantalla.forEach{x => x.viajar(personajeElegido)}})
+		
+		game.onTick(200,"viajeBala",{balasEnPantalla.forEach{x => x.viajar(personajeElegido)}})
 	}
 	
 	method elegirOleada () {

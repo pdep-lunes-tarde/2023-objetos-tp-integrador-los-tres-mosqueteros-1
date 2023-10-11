@@ -4,7 +4,7 @@ class Arma {
 	const property tipoMunicion
 	
 	method disparar (pj) {
-		const balaDisparada = new Bala (imagen=tipoMunicion.imagen(),rango=tipoMunicion.rango())
+		const balaDisparada = new Bala (imagen=tipoMunicion.imagen(),rango=tipoMunicion.rango(),danio=tipoMunicion.danio())
 		balaDisparada.spawn(pj)
 	}
 	

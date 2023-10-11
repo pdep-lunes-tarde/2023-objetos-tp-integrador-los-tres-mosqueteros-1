@@ -1,67 +1,69 @@
 import obstaculos.*
+import wollok.game.*
 
-object sur {
-	var property position
-	var property siguientePos 
+class Direccion {
+	var property position = game.origin()
+	var property siguientePos = game.origin()
+		
+	method siguientePosicion (objeto) 
+}
+
+
+
+object sur inherits Direccion {
 	
-	method siguientePosicion (objeto) {
+	override method siguientePosicion (objeto) {
 		position = objeto.position()
 		siguientePos = objeto.position().down(1)
 		
-		if(siguientePos.allElements().isEmpty()){
-			return position.down(1)	
+		if(game.getObjectsIn(siguientePos).contains(obstaculo)){
+			return position
 		}
 		
-		return position
+		return siguientePos
 		
 		}	
 }
 
-object norte {
-	var property position
-	var property siguientePos 
+object norte inherits Direccion {
 	
-	method siguientePosicion (objeto) {
+	 override method siguientePosicion (objeto) {
 		position = objeto.position()
 		siguientePos = objeto.position().up(1)
 		
-		if(siguientePos.allElements().isEmpty()){
-			return position.up(1)	
+		if(game.getObjectsIn(siguientePos).contains(obstaculo)){
+			return position
 		}
 		
-		return position
+		return siguientePos
 		
 		}	
 }
-object este {
-	var property position
-	var property siguientePos 
+object este inherits Direccion {
 	
-	method siguientePosicion (objeto) {
-		position = objeto.position()
+		override method siguientePosicion (objeto) {
+			position = objeto.position()
 		siguientePos = objeto.position().right(1)
 		
-		if(siguientePos.allElements().isEmpty()){
-			return position.right(1)	
+		if(game.getObjectsIn(siguientePos).contains(obstaculo)){
+			return position
 		}
 		
-		return position
+		return siguientePos
 		
 		}	
 }
-object oeste {
-	var property position
-	var property siguientePos 
-	
-	method siguientePosicion (objeto) {
+object oeste inherits Direccion {
+
+	    override method siguientePosicion (objeto) {
 		position = objeto.position()
 		siguientePos = objeto.position().left(1)
 		
-		if(siguientePos.allElements().isEmpty()){
-			return position.left(1)	
+		if(game.getObjectsIn(siguientePos).contains(obstaculo)){
+			return position
 		}
 		
-		return position
+		return siguientePos
 		
 		}	
 }

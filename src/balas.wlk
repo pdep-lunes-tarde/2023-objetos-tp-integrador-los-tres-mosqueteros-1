@@ -7,6 +7,7 @@ class Bala {
 	
 	var property direccion = sur
 	var property position = game.origin()
+	var property danio
 	var property rango 
 	var property imagen
 	
@@ -39,20 +40,27 @@ class Bala {
 	method viajar (pj) {
 		if (rango>0){
 			position = direccion.siguientePosicion(self)
+			game.onCollideDo(self,{enemigo => enemigo.recibirDanio(self) self.borrarBala() rango=0})
 			rango --
 		}
 		else {self.borrarBala()}
 	}
 	
 	method borrarBala () {
-		tpIntegrador.sacarBala(self)
-		game.removeVisual(self)
+		if (game.hasVisual(self)) {
+			tpIntegrador.sacarBala(self)
+			game.removeVisual(self)
+		}
+	}
+	
+	method recibirDanio (algo) {
+		
 	}
 	
 	method image () = imagen
 	
 }
 
-const cartucho = new Bala (rango=5,imagen="bala.png")
-const calibreFranco = new Bala (rango=100,imagen="manzana.png")
-const calibreComun = new Bala (rango=7,imagen="bala.png")
+const cartucho = new Bala (rango=5,imagen="bala.png",danio=3)
+const calibreFranco = new Bala (rango=100,imagen="manzana.png",danio=1)
+const calibreComun = new Bala (rango=7,imagen="bala.png",danio=1)
