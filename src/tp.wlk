@@ -11,15 +11,15 @@ object tpIntegrador {
 	var property enemigosEnPantalla = []
 	var selector = 0
 	const oleadas = [oleadaUno,oleadaDos,oleadaTres]
-	const  property balasEnPantalla = new List()
+	const  property utilidadesEnPantalla = new List()
 	var personajeElegido
 	
-	method agregarBala (bala) {
-		balasEnPantalla.add(bala)
+	method agregarUtilidad (bala) {
+		utilidadesEnPantalla.add(bala)
 	}
 	
-	method sacarBala (bala) {
-		balasEnPantalla.remove(bala)
+	method sacarUtilidad (bala) {
+		utilidadesEnPantalla.remove(bala)
 	}
 	
 	method inicializarPantalla(){
@@ -84,7 +84,7 @@ object tpIntegrador {
 		keyboard.left().onPressDo{personajeElegido.direction(oeste) personajeElegido.imagen(personajeElegido.imagenIzquierda())}
 		keyboard.x().onPressDo{personajeElegido.lanzarHabilidad()}
 		
-		game.onTick(200,"viajeBala",{balasEnPantalla.forEach{x => x.viajar(personajeElegido)}})
+		game.onTick(200,"viajeUtilidades",{utilidadesEnPantalla.forEach{x => x.viajar(personajeElegido)}})
 	}
 	
 	method elegirOleada () {

@@ -8,6 +8,7 @@ import tp.*
 import obstaculos.*
 
 class Personaje {
+	var property esEnemigo = false
 	var property vida
 	var property arma
 	var property habilidad
@@ -84,5 +85,5 @@ class Personaje {
 }
 
 const escopetero = new Personaje (vida = 20,arma = escopeta,habilidad = new Trampa(),cooldownHabilidad = 10,pasiva = roboDeVida,imagenDerecha="escopetero derecha.png",imagenIzquierda="escopetero izquierda.png",imagenMenu="escopetero menu1.png")
-const franco = new Personaje (vida = 15,arma = francotirador,habilidad = new Trampa(),cooldownHabilidad = 10,pasiva = roboDeVida,imagenDerecha="sniper chiquito.png",imagenIzquierda="sniper izquierda.png",imagenMenu="sniper.png")
-const ingeniero = new Personaje (vida = 10,arma = pistola,habilidad = new Trampa(),cooldownHabilidad = 10,pasiva = roboDeVida,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")
+const franco = new Personaje (vida = 15,arma = francotirador,habilidad = new Trampa(),cooldownHabilidad = 7,pasiva = roboDeVida,imagenDerecha="sniper chiquito.png",imagenIzquierda="sniper izquierda.png",imagenMenu="sniper.png")
+const ingeniero = new Personaje (vida = 10,arma = pistola,habilidad = new Granada(),cooldownHabilidad = 7,pasiva = roboDeVida,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")

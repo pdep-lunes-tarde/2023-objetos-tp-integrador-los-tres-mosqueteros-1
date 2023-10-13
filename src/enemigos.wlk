@@ -8,6 +8,8 @@ class Enemigo inherits Direccion {
 	var vida
 	const vidaInicial = vida
 	const posInicial = position
+	var property esEnemigo = true
+	var property estaStuneado = false
 	
 	method recibirDanio (objetoDanino) {
 		game.say(self,"auchis")
@@ -19,6 +21,11 @@ class Enemigo inherits Direccion {
 		}
 	}
 	
+	method stun (objeto) {
+		self.estaStuneado(true)
+		game.schedule(3000,{self.estaStuneado(false)})
+	}
+	
 	method spawn () {
 		game.addVisual(self)
 	}
@@ -26,20 +33,23 @@ class Enemigo inherits Direccion {
 	method image () = imagen
 	
 	method perseguir (pj) {
-		if (pj.position().x()>self.position().x()){
+		if(not self.estaStuneado()) {
+			game.onCollideDo(self,{habilidad => if(habilidad.esTrampa()){habilidad.activar(self)}})
+			if (pj.position().x()>self.position().x()){
 			position = este.siguientePosicion(self)
 		}
-		if (pj.position().x()<self.position().x()) {
+			if (pj.position().x()<self.position().x()) {
 			position = oeste.siguientePosicion(self)
 		}
-		if (pj.position().y()>self.position().y()){
+			if (pj.position().y()>self.position().y()){
 			position = norte.siguientePosicion(self)
 		}
-		if (pj.position().y()<self.position().y()){
+			if (pj.position().y()<self.position().y()){
 			position = sur.siguientePosicion(self)
 		}
-		if (pj.position() == self.position()) {
+			if (pj.position() == self.position()) {
 			game.say(self,"Te atrape")
+		}
 		}
 	}
 	
