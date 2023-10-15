@@ -30,7 +30,7 @@ object tpIntegrador {
 	
 	method menu() {
 		self.inicializarPantalla()
-		game.boardGround("fondoachicado.png")
+		game.boardGround("calle.png")
 		game.addVisualIn(escopetero,game.at(2,10))
 		game.addVisualIn(franco,game.at(12,10))
 		game.addVisualIn(ingeniero,game.at(22,10))
@@ -52,10 +52,10 @@ object tpIntegrador {
 
 		game.clear()
 		game.addVisual(personajeElegido) 
-		game.addVisual(obstaculo)
+		obstaculos.forEach({obstaculo => game.addVisual(obstaculo)})
 		game.onTick(2000,"spawn enemigo",{
 			if (not enemigos.isEmpty()){
-			enemigos.first().spawn()  enemigosEnPantalla.add(enemigos.first())   enemigos.remove(enemigos.first())
+			enemigos.first().spawn()  enemigosEnPantalla.add(enemigos.first()) enemigos.remove(enemigos.first())
 			}
 		})
 		game.onTick(500,"enemigo persigue",{

@@ -8,6 +8,7 @@ class Enemigo inherits Direccion {
 	var vida
 	const vidaInicial = vida
 	const posInicial = position
+	const danio
 	var property esEnemigo = true
 	var property estaStuneado = false
 	
@@ -30,11 +31,13 @@ class Enemigo inherits Direccion {
 		game.addVisual(self)
 	}
 	
+	method danio () = danio
+	
 	method image () = imagen
 	
 	method perseguir (pj) {
 		if(not self.estaStuneado()) {
-			game.onCollideDo(self,{habilidad => if(habilidad.esTrampa()){habilidad.activar(self)}})
+			//game.onCollideDo(self,{habilidad => if(habilidad.esTrampa()){habilidad.activar(self)}})
 			if (pj.position().x()>self.position().x()){
 			position = este.siguientePosicion(self)
 		}
@@ -49,6 +52,7 @@ class Enemigo inherits Direccion {
 		}
 			if (pj.position() == self.position()) {
 			game.say(self,"Te atrape")
+			pj.recibirDanio(danio)
 		}
 		}
 	}
@@ -67,9 +71,9 @@ class Enemigo inherits Direccion {
 }
 
 
-const zombieUno = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png")
-const zombieDos = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieDosChiquito.png")
-const zombieTres = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieTresChiquito.png")
-const zombieCuatro = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png")
-const zombieCinco = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png")
-const zombieSeis = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png")
+const zombieUno = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 5)
+const zombieDos = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieDosChiquito.png", danio = 5)
+const zombieTres = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieTresChiquito.png", danio = 5)
+const zombieCuatro = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 5)
+const zombieCinco = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 5)
+const zombieSeis = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 5)

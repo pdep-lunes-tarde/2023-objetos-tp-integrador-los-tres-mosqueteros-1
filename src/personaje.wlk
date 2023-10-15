@@ -6,6 +6,7 @@ import pasivas.*
 import direcciones.*
 import tp.*
 import obstaculos.*
+import enemigos.*
 
 class Personaje {
 	var property esEnemigo = false
@@ -46,7 +47,7 @@ class Personaje {
 	}
 	
 	method recibirDanio (cantidad) {
-		if (vida==1){
+		if (vida <= 0){
 			self.morir()
 		}
 		else {

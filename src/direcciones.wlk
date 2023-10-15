@@ -16,7 +16,7 @@ object sur inherits Direccion {
 		position = objeto.position()
 		siguientePos = objeto.position().down(1)
 		
-		if(game.getObjectsIn(siguientePos).contains(obstaculo)){
+		if(not siguientePos.allElements().filter{elemento => obstaculos.contains(elemento)}.isEmpty()){
 			return position
 		}
 		
@@ -31,7 +31,7 @@ object norte inherits Direccion {
 		position = objeto.position()
 		siguientePos = objeto.position().up(1)
 		
-		if(game.getObjectsIn(siguientePos).contains(obstaculo)){
+		if(not siguientePos.allElements().filter{elemento => obstaculos.contains(elemento)}.isEmpty()){
 			return position
 		}
 		
@@ -45,7 +45,7 @@ object este inherits Direccion {
 			position = objeto.position()
 		siguientePos = objeto.position().right(1)
 		
-		if(game.getObjectsIn(siguientePos).contains(obstaculo)){
+		if(not siguientePos.allElements().filter{elemento => obstaculos.contains(elemento)}.isEmpty()){
 			return position
 		}
 		
@@ -59,7 +59,7 @@ object oeste inherits Direccion {
 		position = objeto.position()
 		siguientePos = objeto.position().left(1)
 		
-		if(game.getObjectsIn(siguientePos).contains(obstaculo)){
+		if(not siguientePos.allElements().filter{elemento => obstaculos.contains(elemento)}.isEmpty()){
 			return position
 		}
 		

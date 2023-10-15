@@ -8,6 +8,8 @@ class Trampa {
 	var property danio = 7
 	var property esEnemigo = false
 	
+	method esTrampa()= esTrampa
+	
 	method lanzar (pj) {
 			const trampaLanzada = new Trampa ()
 			trampaLanzada.position(pj.direction().siguientePosicion(pj))
@@ -43,6 +45,8 @@ class Granada {
 	var property direccion = sur
 	var property danio = 8
 	var rango = 10
+	
+	method esTrampa()= esTrampa
 	
 	method lanzar (pj) {
 		const granadaLanzada = new Granada()
