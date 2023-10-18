@@ -9,7 +9,10 @@ import obstaculos.*
 import enemigos.*
 
 class Personaje {
+	var property esPersonaje = true
+	var property esTrampa = false
 	var property esEnemigo = false
+	var property recibioDanioHacePoco = false
 	var property vida
 	var property arma
 	var property habilidad
@@ -42,33 +45,35 @@ class Personaje {
 		position = self.siguientePosicion()
 	}
 	
+//	method retroceder () {
+//		position = direction.direccionOpuesta().siguientePosicion(self)
+//	}
+	
 	method disparar () {
 		arma.disparar(self)
 	}
 	
 	method recibirDanio (cantidad) {
-		if (vida <= 0){
+		if (not recibioDanioHacePoco) {
+			vida -= cantidad
+			if (vida <= 0){
 			self.morir()
-		}
-		else {
-			self.cambiarVida(-cantidad)
+			}
+			self.recibioDanioHacePoco(true)
+			game.schedule(500,{self.recibioDanioHacePoco(false)})
 		}
 	} 
 	
 	method morir () {
-		self.resetearValores()
-		game.clear()
-		tpIntegrador.menu()
+		tpIntegrador.resetearValores()		
 	}
 	
 	method resetearValores () {
 		arma = armaInicial
 		habilidad = habilidadInicial
 		vida = vidaInicial
-	}
-	
-	method cambiarVida (valor) {
-		vida += valor
+		imagen = imagenMenu
+		position = game.origin()
 	}
 	
 	method lanzarHabilidad () {

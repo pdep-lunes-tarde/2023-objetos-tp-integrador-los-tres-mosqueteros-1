@@ -6,9 +6,10 @@ import tp.*
 class Enemigo inherits Direccion {
 	const imagen 
 	var vida
+	var property ultimaDireccion = norte
 	const vidaInicial = vida
 	const posInicial = position
-	const danio
+	var property danio
 	var property esEnemigo = true
 	var property estaStuneado = false
 	
@@ -17,8 +18,7 @@ class Enemigo inherits Direccion {
 		vida -= objetoDanino.danio()
 		if (vida <= 0) {
 			self.borrar()
-			vida = vidaInicial
-			position = posInicial
+			self.resetearValores()
 		}
 	}
 	
@@ -30,30 +30,29 @@ class Enemigo inherits Direccion {
 	method spawn () {
 		game.addVisual(self)
 	}
-	
-	method danio () = danio
-	
+		
 	method image () = imagen
 	
 	method perseguir (pj) {
 		if(not self.estaStuneado()) {
-			//game.onCollideDo(self,{habilidad => if(habilidad.esTrampa()){habilidad.activar(self)}})
+			game.onCollideDo(self,{algo => if (algo.esTrampa()) {algo.activar(self)} if(algo.esPersonaje()){algo.recibirDanio(danio)}})
 			if (pj.position().x()>self.position().x()){
 			position = este.siguientePosicion(self)
+			ultimaDireccion = este
 		}
 			if (pj.position().x()<self.position().x()) {
 			position = oeste.siguientePosicion(self)
+			ultimaDireccion = oeste
 		}
 			if (pj.position().y()>self.position().y()){
 			position = norte.siguientePosicion(self)
+			ultimaDireccion = norte
 		}
 			if (pj.position().y()<self.position().y()){
 			position = sur.siguientePosicion(self)
+			ultimaDireccion = sur
 		}
-			if (pj.position() == self.position()) {
-			game.say(self,"Te atrape")
-			pj.recibirDanio(danio)
-		}
+		
 		}
 	}
 	
@@ -66,6 +65,11 @@ class Enemigo inherits Direccion {
 	
 	override method siguientePosicion (objeto) {
 		
+	}
+	
+	method resetearValores() {
+		vida = vidaInicial
+		position = posInicial
 	}
 	
 }

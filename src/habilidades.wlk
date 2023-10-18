@@ -4,6 +4,7 @@ import tp.*
 
 class Trampa {
 	var property esTrampa = true
+	var property esPersonaje = false
 	var property position = game.origin()
 	var property danio = 7
 	var property esEnemigo = false

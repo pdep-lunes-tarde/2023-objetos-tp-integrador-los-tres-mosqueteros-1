@@ -9,10 +9,20 @@ import enemigos.*
 
 object tpIntegrador {
 	var property enemigosEnPantalla = []
+	var enemigos
 	var selector = 0
 	const oleadas = [oleadaUno,oleadaDos,oleadaTres]
-	const  property utilidadesEnPantalla = new List()
+	var property utilidadesEnPantalla = new List()
 	var personajeElegido
+	
+	method resetearValores () {
+		personajeElegido.resetearValores()
+		oleadas.forEach({x => x.resetearValores()})
+		selector = 0
+		enemigosEnPantalla = []
+		utilidadesEnPantalla = []
+		self.menu()
+	}
 	
 	method agregarUtilidad (bala) {
 		utilidadesEnPantalla.add(bala)
@@ -29,6 +39,7 @@ object tpIntegrador {
 	}
 	
 	method menu() {
+		game.clear()
 		self.inicializarPantalla()
 		game.boardGround("calle.png")
 		game.addVisualIn(escopetero,game.at(2,10))
@@ -47,7 +58,7 @@ object tpIntegrador {
 	
 	method jugar() {
 
-		var enemigos = self.elegirOleada()
+		enemigos = self.elegirOleada()
 
 
 		game.clear()
@@ -62,7 +73,7 @@ object tpIntegrador {
 			if (not enemigosEnPantalla.isEmpty()){
 				enemigosEnPantalla.forEach({x => x.perseguir(personajeElegido)})
 		}})
-		game.onTick(2000,"pasar de ronda",{
+		game.onTick(2000,"a",{
 			if (enemigosEnPantalla.isEmpty() && enemigos.isEmpty()){
 				selector += 1
 				if (selector < 3){
@@ -93,14 +104,17 @@ object tpIntegrador {
 	
 }
 
-object oleadaUno {
-	var property enemigos = [zombieUno]
+class Oleada {
+	var property enemigos
+	const property enemigosIniciales = enemigos
+	method resetearValores () {
+		self.enemigos().forEach({x => x.resetearValores()})
+		self.enemigos(self.enemigosIniciales())
+	}
 }
 
-object oleadaDos {
-	var property enemigos = [zombieUno,zombieDos]
-}
+const oleadaUno = new Oleada (enemigos = [zombieUno])
 
-object oleadaTres {
-	var property enemigos = [zombieUno,zombieDos,zombieTres]
-}
+const oleadaDos = new Oleada (enemigos = [zombieUno,zombieDos])
+
+const oleadaTres = new Oleada (enemigos = [zombieUno,zombieDos,zombieTres])

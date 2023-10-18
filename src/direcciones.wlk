@@ -6,6 +6,8 @@ class Direccion {
 	var property siguientePos = game.origin()
 		
 	method siguientePosicion (objeto) 
+	
+	method direccionOpuesta () = norte
 }
 
 
@@ -23,6 +25,8 @@ object sur inherits Direccion {
 		return siguientePos
 		
 		}	
+		
+		override method direccionOpuesta() = norte
 }
 
 object norte inherits Direccion {
@@ -38,6 +42,8 @@ object norte inherits Direccion {
 		return siguientePos
 		
 		}	
+		
+		override method direccionOpuesta() = sur
 }
 object este inherits Direccion {
 	
@@ -51,7 +57,10 @@ object este inherits Direccion {
 		
 		return siguientePos
 		
-		}	
+		}
+		
+		override method direccionOpuesta() = oeste
+			
 }
 object oeste inherits Direccion {
 
@@ -66,4 +75,6 @@ object oeste inherits Direccion {
 		return siguientePos
 		
 		}	
+		
+		override method direccionOpuesta() = este
 }
