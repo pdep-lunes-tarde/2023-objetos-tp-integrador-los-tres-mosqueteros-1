@@ -59,6 +59,7 @@ object tpIntegrador {
 	method jugar() {
 
 		enemigos = self.elegirOleada()
+		var rondasHastaMejorar = 3
 
 
 		game.clear()
@@ -73,13 +74,22 @@ object tpIntegrador {
 			if (not enemigosEnPantalla.isEmpty()){
 				enemigosEnPantalla.forEach({x => x.perseguir(personajeElegido)})
 		}})
-		game.onTick(2000,"a",{
+		game.onTick(2000,"pasar de ronda",{
 			if (enemigosEnPantalla.isEmpty() && enemigos.isEmpty()){
 				selector += 1
-				if (selector < 3){
+				rondasHastaMejorar --
+				if (selector < 10){
 					enemigos = self.elegirOleada()
 				}
+				
 				else {game.say(personajeElegido,"Ganeeeee")}
+				
+				if (rondasHastaMejorar == 0) {
+					personajeElegido.mejorar()
+					rondasHastaMejorar = 3
+				}
+				
+
 			}
 		})		
 		
@@ -106,7 +116,7 @@ object tpIntegrador {
 
 class Oleada {
 	var property enemigos
-	const property enemigosIniciales = enemigos
+	const property enemigosIniciales = enemigos.copy()
 	method resetearValores () {
 		self.enemigos().forEach({x => x.resetearValores()})
 		self.enemigos(self.enemigosIniciales())

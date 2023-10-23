@@ -6,11 +6,14 @@ import tp.*
 class Bala {
 	var property esEnemigo = false
 	var property esTrampa = false
+	var property esPersonaje = false
 	var property direccion = sur
 	var property position = game.origin()
 	var property danio
 	var property rango 
 	var property imagen
+	
+	method creaBala (pj) = new Bala (danio = 1 , imagen = "bala.png" , rango = 7)
 	
 	method spawn (pj) {
 		direccion = pj.direction()
@@ -59,6 +62,34 @@ class Bala {
 	
 }
 
-const cartucho = new Bala (rango=5,imagen="bala.png",danio=3)
-const calibreFranco = new Bala (rango=20,imagen="manzana.png",danio=1)
+class CalibreFranco inherits Bala {
+	var distanciaViajada = 0
+	
+	override method creaBala (pj) = new CalibreFranco (danio = 1 , imagen = "bala.png" , rango = 15)
+	
+	override method viajar (pj) {
+		if (rango>0){
+			position = direccion.siguientePosicion(self)
+			distanciaViajada ++
+			danio += distanciaViajada
+			game.onCollideDo(self,{enemigo => if(enemigo.esEnemigo()){enemigo.recibirDanio(self) self.borrarBala() rango=0}})
+			rango --
+		}
+		else {self.borrarBala()}
+	}
+}
+
+class Cartucho inherits Bala {
+	
+	override method creaBala (pj) = new Cartucho (danio = 3 , imagen = "bala.png" , rango = 5)
+	
+	override method viajar (pj) {
+		if (rango>0){
+			position = direccion.siguientePosicion(self)
+			game.onCollideDo(self,{enemigo => if(enemigo.esEnemigo()){enemigo.recibirDanio(self) self.borrarBala() rango=0 pj.curar(1)}})
+			rango --
+		}
+		else {self.borrarBala()}
+	}
+}
 const calibreComun = new Bala (rango=7,imagen="bala.png",danio=1)

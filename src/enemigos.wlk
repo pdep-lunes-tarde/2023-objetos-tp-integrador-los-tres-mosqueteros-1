@@ -12,6 +12,7 @@ class Enemigo inherits Direccion {
 	var property danio
 	var property esEnemigo = true
 	var property estaStuneado = false
+	var property estaRalentizado = false
 	
 	method recibirDanio (objetoDanino) {
 		game.say(self,"auchis")
@@ -22,9 +23,13 @@ class Enemigo inherits Direccion {
 		}
 	}
 	
+	method debilitar () {
+		danio -= 2
+	}
+	
 	method stun (objeto) {
 		self.estaStuneado(true)
-		game.schedule(3000,{self.estaStuneado(false)})
+		game.schedule(4000,{self.estaStuneado(false)})
 	}
 	
 	method spawn () {
@@ -34,23 +39,19 @@ class Enemigo inherits Direccion {
 	method image () = imagen
 	
 	method perseguir (pj) {
-		if(not self.estaStuneado()) {
+		if(not self.estaStuneado() && not self.estaRalentizado()) {
 			game.onCollideDo(self,{algo => if (algo.esTrampa()) {algo.activar(self)} if(algo.esPersonaje()){algo.recibirDanio(danio)}})
 			if (pj.position().x()>self.position().x()){
 			position = este.siguientePosicion(self)
-			ultimaDireccion = este
 		}
 			if (pj.position().x()<self.position().x()) {
 			position = oeste.siguientePosicion(self)
-			ultimaDireccion = oeste
 		}
 			if (pj.position().y()>self.position().y()){
 			position = norte.siguientePosicion(self)
-			ultimaDireccion = norte
 		}
 			if (pj.position().y()<self.position().y()){
 			position = sur.siguientePosicion(self)
-			ultimaDireccion = sur
 		}
 		
 		}
