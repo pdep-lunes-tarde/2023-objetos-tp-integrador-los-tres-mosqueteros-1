@@ -23,7 +23,7 @@ class Trampa {
 	method activar (entidad) {
 		if (entidad.esEnemigo()){
 			entidad.recibirDanio(self)
-			entidad.stun(self)
+			entidad.stun(5)
 			game.removeVisual(self)
 		}
 			
@@ -87,43 +87,45 @@ class Granada {
 	method image () = "granadaChiquito.png"
 	
 }
-//repensar la red
-class Red  {
-	var property position = game.origin()
-	var property direccion = sur
-	var property rango = 15
+
+class DisparoCertero  {
 	var property esTrampa = false
 	var property esEnemigo = false
+	var property esPersonaje = false
+	var property position = game.origin()
+	var property direccion = sur
+	var property danio = 20
+	var rango = 15
 	
-	 method lanzar (pj) {
-		const redLanzada = new Red()
-		redLanzada.direccion(pj.direction())
-		redLanzada.position(pj.direction().siguientePosicion(pj))
-		game.addVisual(redLanzada)
-		tpIntegrador.agregarUtilidad(redLanzada)
+	method lanzar (pj) {
+		const disparo = new DisparoCertero()
+		disparo.direccion(pj.direction())
+		disparo.position(pj.direction().siguientePosicion(pj))
+		game.addVisual(disparo)
+		tpIntegrador.agregarUtilidad(disparo)
 	}
 	
 	method viajar (pj) {
 		if (rango>0){
 			position = direccion.siguientePosicion(self)
-			game.onCollideDo(self,{enemigo => if (enemigo.esEnemigo()){self.explota() rango = 0}})
+			game.onCollideDo(self,{enemigo => if (enemigo.esEnemigo()){enemigo.recibirDanio(self) enemigo.stun(5) rango = 0}})
 			rango --
 		}
-		else {self.explota()}
-	}	
+		else {self.eliminarse()}
+	}
 	
-	method explota () {
-		if (game.hasVisual(self)){
-			const colliders = game.colliders(self)
-			colliders.forEach({x => x.debilitar()})
-			tpIntegrador.sacarUtilidad(self)
+	method eliminarse () {
+		if (game.hasVisual(self)) {
 			game.removeVisual(self)
 		}
 	}
 	
 	method mejorar (pj) {
-		
+		danio += 10
+		rango += 2
+		pj.cooldownHabilidad(pj.cooldownHabilidad()-2)
 	}
 	
-	method image () = "redChiquito.png"
+	method image () = "bala.png"
+	
 }

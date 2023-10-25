@@ -81,7 +81,7 @@ class CalibreFranco inherits Bala {
 
 class Cartucho inherits Bala {
 	
-	override method creaBala (pj) = new Cartucho (danio = 3 , imagen = "bala.png" , rango = 5)
+	override method creaBala (pj) = new Cartucho (danio = 7 , imagen = "bala.png" , rango = 5)
 	
 	override method viajar (pj) {
 		if (rango>0){
@@ -92,4 +92,15 @@ class Cartucho inherits Bala {
 		else {self.borrarBala()}
 	}
 }
-const calibreComun = new Bala (rango=7,imagen="bala.png",danio=1)
+
+class CalibreSubfu inherits Bala {
+	override method creaBala (pj) = new Bala (rango = 6,imagen = "bala.png",danio = 2)
+}
+
+class CalibreAk inherits Bala {
+	override method creaBala (pj) = new Bala (rango = 10,imagen = "bala.png",danio = 4)
+}
+
+class CalibreLigero inherits Bala {
+	override method creaBala (pj) = new Bala (rango = 14,imagen = "bala.png",danio = 6)
+}

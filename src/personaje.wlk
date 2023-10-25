@@ -7,10 +7,7 @@ import tp.*
 import obstaculos.*
 import enemigos.*
 
-class Personaje {
-	var property esPersonaje = true
-	var property esTrampa = false
-	var property esEnemigo = false
+class Personaje  {
 	var property recibioDanioHacePoco = false
 	var property vida
 	var property arma
@@ -95,10 +92,22 @@ class Personaje {
 	
 	method mejorar () {
 		habilidad.mejorar(self)
+		vida += 5
 	}
 	
 }
 
+class Ingeniero inherits Personaje {
+	const listaArmas = [subfusil,ak,ligera]
+	var selector = 0
+	
+	override method mejorar () {
+		super()
+		self.arma(listaArmas.get(selector))
+		selector = 2.max(selector+1)
+	}
+}
+
 const escopetero = new Personaje (vida = 20,arma = escopeta,cooldownArma = 3,habilidad = new Trampa(),cooldownHabilidad = 10,imagenDerecha="escopetero derecha.png",imagenIzquierda="escopetero izquierda.png",imagenMenu="escopetero menu1.png")
-const franco = new Personaje (vida = 15,arma = francotirador,cooldownArma = 5,habilidad = new Red(),cooldownHabilidad = 8,imagenDerecha="sniper chiquito.png",imagenIzquierda="sniper izquierda.png",imagenMenu="sniper.png")
+const franco = new Personaje (vida = 15,arma = francotirador,cooldownArma = 5,habilidad = new DisparoCertero(),cooldownHabilidad = 15,imagenDerecha="sniper chiquito.png",imagenIzquierda="sniper izquierda.png",imagenMenu="sniper.png")
 const ingeniero = new Personaje (vida = 10,arma = pistola,cooldownArma = 1,habilidad = new Granada(),cooldownHabilidad = 7,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")

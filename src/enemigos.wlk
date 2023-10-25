@@ -6,13 +6,12 @@ import tp.*
 class Enemigo inherits Direccion {
 	const imagen 
 	var vida
-	var property ultimaDireccion = norte
 	const vidaInicial = vida
 	const posInicial = position
 	var property danio
 	var property esEnemigo = true
 	var property estaStuneado = false
-	var property estaRalentizado = false
+	var property velocidadDeMovimiento
 	
 	method recibirDanio (objetoDanino) {
 		game.say(self,"auchis")
@@ -27,9 +26,9 @@ class Enemigo inherits Direccion {
 		danio -= 2
 	}
 	
-	method stun (objeto) {
+	method stun (tiempo) {
 		self.estaStuneado(true)
-		game.schedule(4000,{self.estaStuneado(false)})
+		game.schedule(1000*tiempo,{self.estaStuneado(false)})
 	}
 	
 	method spawn () {
@@ -39,19 +38,23 @@ class Enemigo inherits Direccion {
 	method image () = imagen
 	
 	method perseguir (pj) {
-		if(not self.estaStuneado() && not self.estaRalentizado()) {
+		if(not self.estaStuneado()) {
 			game.onCollideDo(self,{algo => if (algo.esTrampa()) {algo.activar(self)} if(algo.esPersonaje()){algo.recibirDanio(danio)}})
 			if (pj.position().x()>self.position().x()){
 			position = este.siguientePosicion(self)
+			self.stun(velocidadDeMovimiento)
 		}
 			if (pj.position().x()<self.position().x()) {
 			position = oeste.siguientePosicion(self)
+			self.stun(velocidadDeMovimiento)
 		}
 			if (pj.position().y()>self.position().y()){
 			position = norte.siguientePosicion(self)
+			self.stun(velocidadDeMovimiento)
 		}
 			if (pj.position().y()<self.position().y()){
 			position = sur.siguientePosicion(self)
+			self.stun(velocidadDeMovimiento)
 		}
 		
 		}
@@ -76,9 +79,13 @@ class Enemigo inherits Direccion {
 }
 
 
-const zombieUno = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 5)
-const zombieDos = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieDosChiquito.png", danio = 5)
-const zombieTres = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieTresChiquito.png", danio = 5)
-const zombieCuatro = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 5)
-const zombieCinco = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 5)
-const zombieSeis = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 5)
+const zombie = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1)
+const zombieFuerte = new Enemigo (position = game.at(30,10),vida = 50,imagen = "zombieDosChiquito.png", danio = 5,velocidadDeMovimiento = 1)
+const zombieTanque = new Enemigo (position = game.at(30,10),vida = 100,imagen = "zombieTresChiquito.png", danio = 10,velocidadDeMovimiento = 2)
+const zombieFlash = new Enemigo (position = game.at(30,10),vida = 1,imagen = "zombieChiquito.png", danio = 2,velocidadDeMovimiento = 0.1)
+const zombieCurtido = new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1)
+const zombieFantasma = new Enemigo (position = game.at(30,10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7)
+const zombieCasiElite = new Enemigo (position = game.at(30,10),vida = 60,imagen = "zombieChiquito.png", danio = 6,velocidadDeMovimiento = 1)
+const zombieElite = new Enemigo (position = game.at(30,10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1)
+const zombieUltraTanque = new Enemigo (position = game.at(30,10),vida = 200,imagen = "zombieChiquito.png", danio = 20,velocidadDeMovimiento = 2.5)
+const Boss = new Enemigo (position = game.at(30,10),vida = 2000,imagen = "zombieChiquito.png", danio = 100,velocidadDeMovimiento = 4.5)
