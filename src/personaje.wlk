@@ -8,6 +8,10 @@ import obstaculos.*
 import enemigos.*
 
 class Personaje  {
+	var property esTrampa = false
+	var property esEnemigo = false
+	var property esPersonaje = true
+	
 	var property recibioDanioHacePoco = false
 	var property vida
 	var property arma
@@ -93,6 +97,7 @@ class Personaje  {
 	method mejorar () {
 		habilidad.mejorar(self)
 		vida += 5
+		game.say(self,"Me siento mas fuerte!")
 	}
 	
 }

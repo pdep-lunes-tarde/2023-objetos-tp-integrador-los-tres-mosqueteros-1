@@ -10,11 +10,13 @@ class Enemigo inherits Direccion {
 	const posInicial = position
 	var property danio
 	var property esEnemigo = true
+	var property esTrampa = false
+	var property esPersonaje = false
 	var property estaStuneado = false
 	var property velocidadDeMovimiento
 	
 	method recibirDanio (objetoDanino) {
-		game.say(self,"auchis")
+//		game.say(self,"auchis")
 		vida -= objetoDanino.danio()
 		if (vida <= 0) {
 			self.borrar()

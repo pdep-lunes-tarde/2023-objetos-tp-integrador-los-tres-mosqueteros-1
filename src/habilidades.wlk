@@ -47,6 +47,7 @@ class Trampa {
 class Granada {
 	var property esTrampa = false
 	var property esEnemigo = false
+	var property esPersonaje = false
 	var property position = game.origin()
 	var property direccion = sur
 	var property danio = 8
