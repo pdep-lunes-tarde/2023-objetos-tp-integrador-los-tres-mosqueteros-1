@@ -8,7 +8,7 @@ class Bala {
 	var property esTrampa = false
 	var property esPersonaje = false
 	var property direccion = sur
-	var property position = game.origin()
+	var property position = new Posicion (x=0,y=0)
 	var property danio
 	var property rango 
 	var property imagen

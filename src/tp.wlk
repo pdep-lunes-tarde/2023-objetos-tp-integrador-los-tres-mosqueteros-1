@@ -7,6 +7,9 @@ import direcciones.*
 import menu.*
 import enemigos.*
 
+const musicaJuego = game.sound("Sounds/MusicaJuego.mp3")
+const musicaMenu = game.sound("MusicaMenu.mp3")
+
 object tpIntegrador {
 	var property enemigosEnPantalla = []
 	var enemigos
@@ -21,6 +24,7 @@ object tpIntegrador {
 		selector = 0
 		enemigosEnPantalla = []
 		utilidadesEnPantalla = []
+//		musicaJuego.stop()
 		self.menu()
 	}
 	
@@ -46,6 +50,10 @@ object tpIntegrador {
 		game.addVisualIn(franco,game.at(12,10))
 		game.addVisualIn(ingeniero,game.at(22,10))
 
+//		musicaMenu.shouldLoop(true)
+//		musicaMenu.volume(0.3)
+//		musicaMenu.play()
+		
 		var seleccion = 0
 		keyboard.right().onPressDo{seleccion = 2.min(seleccion+1)}
 		
@@ -63,6 +71,10 @@ object tpIntegrador {
 
 
 		game.clear()
+//		musicaMenu.pause()
+//		musicaJuego.shouldLoop(true)
+//		musicaJuego.volume(0.3)
+//		musicaJuego.play()
 		game.addVisual(personajeElegido) 
 		obstaculos.forEach({obstaculo => game.addVisual(obstaculo)})
 		game.onTick(2000,"spawn enemigo",{
@@ -124,98 +136,98 @@ class Oleada {
 }
 
 //tres zombies
-const oleadaUno = new Oleada (enemigos = [new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
-										  new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
-										  new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1)
+const oleadaUno = new Oleada (enemigos = [new Enemigo (position = new Posicion(x=30,y=10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
+										  new Enemigo (position = new Posicion(x=30,y=10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
+										  new Enemigo (position = new Posicion(x=30,y=10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1)
 ])
 
 //4 zombies 3 curtidos
-const oleadaDos = new Oleada (enemigos = [new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
-										  new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
-										  new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
-										  new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
-										  new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
-										  new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
-										  new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1)
+const oleadaDos = new Oleada (enemigos = [new Enemigo (position = new Posicion(x=30,y=10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
+										  new Enemigo (position = new Posicion(x=30,y=10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
+										  new Enemigo (position = new Posicion(x=30,y=10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
+										  new Enemigo (position = new Posicion(x=30,y=10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
+										  new Enemigo (position = new Posicion(x=30,y=10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
+										  new Enemigo (position = new Posicion(x=30,y=10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
+										  new Enemigo (position = new Posicion(x=30,y=10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1)
 ])
 
 //2 fuertes 3 curtidos
-const oleadaTres = new Oleada (enemigos = [new Enemigo (position = game.at(30,10),vida = 50,imagen = "zombieDosChiquito.png", danio = 5,velocidadDeMovimiento = 1),
-										   new Enemigo (position = game.at(30,10),vida = 50,imagen = "zombieDosChiquito.png", danio = 5,velocidadDeMovimiento = 1),
-										   new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
-										   new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
-										   new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1)
+const oleadaTres = new Oleada (enemigos = [new Enemigo (position = new Posicion(x=30,y=10),vida = 50,imagen = "zombieDosChiquito.png", danio = 5,velocidadDeMovimiento = 1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 50,imagen = "zombieDosChiquito.png", danio = 5,velocidadDeMovimiento = 1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1)
 ])
 
 //1 tanque 3 zombies
-const oleadaCuatro = new Oleada (enemigos = [new Enemigo (position = game.at(30,10),vida = 100,imagen = "zombieTresChiquito.png", danio = 10,velocidadDeMovimiento = 2),
-											 new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
-											 new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
-											 new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1)
+const oleadaCuatro = new Oleada (enemigos = [new Enemigo (position = new Posicion(x=30,y=10),vida = 100,imagen = "zombieTresChiquito.png", danio = 10,velocidadDeMovimiento = 2),
+											 new Enemigo (position = new Posicion(x=30,y=10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
+											 new Enemigo (position = new Posicion(x=30,y=10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
+											 new Enemigo (position = new Posicion(x=30,y=10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1)
 											 
 ])
 
 //dos fantasmas 3 curtidos
-const oleadaCinco = new Oleada (enemigos = [new Enemigo (position = game.at(30,10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7),
-											new Enemigo (position = game.at(30,10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7),
-											new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
-											new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
-											new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1)
+const oleadaCinco = new Oleada (enemigos = [new Enemigo (position = new Posicion(x=30,y=10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7),
+											new Enemigo (position = new Posicion(x=30,y=10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7),
+											new Enemigo (position = new Posicion(x=30,y=10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
+											new Enemigo (position = new Posicion(x=30,y=10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
+											new Enemigo (position = new Posicion(x=30,y=10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1)
 ])
 
 //3 flashes 3 fantasmas
-const oleadaSeis = new Oleada (enemigos = [new Enemigo (position = game.at(30,10),vida = 1,imagen = "zombieChiquito.png", danio = 2,velocidadDeMovimiento = 0.1),
-										   new Enemigo (position = game.at(30,10),vida = 1,imagen = "zombieChiquito.png", danio = 2,velocidadDeMovimiento = 0.1),
-										   new Enemigo (position = game.at(30,10),vida = 1,imagen = "zombieChiquito.png", danio = 2,velocidadDeMovimiento = 0.1),
-										   new Enemigo (position = game.at(30,10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7),
-										   new Enemigo (position = game.at(30,10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7),
-										   new Enemigo (position = game.at(30,10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7)
+const oleadaSeis = new Oleada (enemigos = [new Enemigo (position = new Posicion(x=30,y=10),vida = 1,imagen = "zombieChiquito.png", danio = 2,velocidadDeMovimiento = 0.1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 1,imagen = "zombieChiquito.png", danio = 2,velocidadDeMovimiento = 0.1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 1,imagen = "zombieChiquito.png", danio = 2,velocidadDeMovimiento = 0.1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7)
 ])
 
 //1 elite 2 casi elites
-const oleadaSiete = new Oleada (enemigos = [new Enemigo (position = game.at(30,10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
-											new Enemigo (position = game.at(30,10),vida = 60,imagen = "zombieChiquito.png", danio = 6,velocidadDeMovimiento = 1),
-											new Enemigo (position = game.at(30,10),vida = 60,imagen = "zombieChiquito.png", danio = 6,velocidadDeMovimiento = 1)
+const oleadaSiete = new Oleada (enemigos = [new Enemigo (position = new Posicion(x=30,y=10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
+											new Enemigo (position = new Posicion(x=30,y=10),vida = 60,imagen = "zombieChiquito.png", danio = 6,velocidadDeMovimiento = 1),
+											new Enemigo (position = new Posicion(x=30,y=10),vida = 60,imagen = "zombieChiquito.png", danio = 6,velocidadDeMovimiento = 1)
 ])
 
 //2 de cada
-const oleadaOcho = new Oleada (enemigos = [new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
-										   new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
-										   new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
-										   new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
-										   new Enemigo (position = game.at(30,10),vida = 50,imagen = "zombieDosChiquito.png", danio = 5,velocidadDeMovimiento = 1),
-										   new Enemigo (position = game.at(30,10),vida = 50,imagen = "zombieDosChiquito.png", danio = 5,velocidadDeMovimiento = 1),
-										   new Enemigo (position = game.at(30,10),vida = 1,imagen = "zombieChiquito.png", danio = 2,velocidadDeMovimiento = 0.1),
-										   new Enemigo (position = game.at(30,10),vida = 1,imagen = "zombieChiquito.png", danio = 2,velocidadDeMovimiento = 0.1),
-										   new Enemigo (position = game.at(30,10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7),
-										   new Enemigo (position = game.at(30,10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7),
-										   new Enemigo (position = game.at(30,10),vida = 60,imagen = "zombieChiquito.png", danio = 6,velocidadDeMovimiento = 1),
-										   new Enemigo (position = game.at(30,10),vida = 60,imagen = "zombieChiquito.png", danio = 6,velocidadDeMovimiento = 1),
-										   new Enemigo (position = game.at(30,10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1)
+const oleadaOcho = new Oleada (enemigos = [new Enemigo (position = new Posicion(x=30,y=10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 50,imagen = "zombieDosChiquito.png", danio = 5,velocidadDeMovimiento = 1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 50,imagen = "zombieDosChiquito.png", danio = 5,velocidadDeMovimiento = 1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 1,imagen = "zombieChiquito.png", danio = 2,velocidadDeMovimiento = 0.1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 1,imagen = "zombieChiquito.png", danio = 2,velocidadDeMovimiento = 0.1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 60,imagen = "zombieChiquito.png", danio = 6,velocidadDeMovimiento = 1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 60,imagen = "zombieChiquito.png", danio = 6,velocidadDeMovimiento = 1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1)
 ])
 
 //1 ultra tanque 1 tanque 3 elites 5 random
-const oleadaNueve = new Oleada (enemigos = [new Enemigo (position = game.at(30,10),vida = 200,imagen = "zombieChiquito.png", danio = 20,velocidadDeMovimiento = 2.5),
-											new Enemigo (position = game.at(30,10),vida = 100,imagen = "zombieTresChiquito.png", danio = 10,velocidadDeMovimiento = 2),
-											new Enemigo (position = game.at(30,10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
-											new Enemigo (position = game.at(30,10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
-											new Enemigo (position = game.at(30,10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
-											new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
-											new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
-											new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
-											new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
-											new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1)
+const oleadaNueve = new Oleada (enemigos = [new Enemigo (position = new Posicion(x=30,y=10),vida = 200,imagen = "zombieChiquito.png", danio = 20,velocidadDeMovimiento = 2.5),
+											new Enemigo (position = new Posicion(x=30,y=10),vida = 100,imagen = "zombieTresChiquito.png", danio = 10,velocidadDeMovimiento = 2),
+											new Enemigo (position = new Posicion(x=30,y=10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
+											new Enemigo (position = new Posicion(x=30,y=10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
+											new Enemigo (position = new Posicion(x=30,y=10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
+											new Enemigo (position = new Posicion(x=30,y=10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
+											new Enemigo (position = new Posicion(x=30,y=10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
+											new Enemigo (position = new Posicion(x=30,y=10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
+											new Enemigo (position = new Posicion(x=30,y=10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1),
+											new Enemigo (position = new Posicion(x=30,y=10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1)
 ])
 
 //el boss dos ultra tanques 5 elites 2 fantasmas
-const oleadaDiez = new Oleada (enemigos = [new Enemigo (position = game.at(30,10),vida = 1000,imagen = "zombieChiquito.png", danio = 100,velocidadDeMovimiento = 3),
-										   new Enemigo (position = game.at(30,10),vida = 200,imagen = "zombieChiquito.png", danio = 20,velocidadDeMovimiento = 2.5),
-										   new Enemigo (position = game.at(30,10),vida = 200,imagen = "zombieChiquito.png", danio = 20,velocidadDeMovimiento = 2.5),
-										   new Enemigo (position = game.at(30,10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
-										   new Enemigo (position = game.at(30,10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
-										   new Enemigo (position = game.at(30,10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
-										   new Enemigo (position = game.at(30,10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
-										   new Enemigo (position = game.at(30,10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
-										   new Enemigo (position = game.at(30,10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7),
-										   new Enemigo (position = game.at(30,10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7)
+const oleadaDiez = new Oleada (enemigos = [new Enemigo (position = new Posicion(x=30,y=10),vida = 1000,imagen = "zombieChiquito.png", danio = 100,velocidadDeMovimiento = 3),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 200,imagen = "zombieChiquito.png", danio = 20,velocidadDeMovimiento = 2.5),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 200,imagen = "zombieChiquito.png", danio = 20,velocidadDeMovimiento = 2.5),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7),
+										   new Enemigo (position = new Posicion(x=30,y=10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7)
 ])

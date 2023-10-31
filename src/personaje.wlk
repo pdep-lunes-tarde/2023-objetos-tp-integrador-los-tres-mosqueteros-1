@@ -33,7 +33,7 @@ class Personaje  {
 	var property imagen = imagenMenu
 	
 	var property direction = sur
-	var property position = game.origin()	
+	var property position = new Posicion (x=0,y=0)	
 
 	method image() = imagen
 	
@@ -79,7 +79,7 @@ class Personaje  {
 		habilidad = habilidadInicial
 		vida = vidaInicial
 		imagen = imagenMenu
-		position = game.origin()
+		position = new Posicion (x=0,y=0)
 	}
 	
 	method lanzarHabilidad () {
@@ -110,9 +110,10 @@ class Ingeniero inherits Personaje {
 		super()
 		self.arma(listaArmas.get(selector))
 		selector = 2.max(selector+1)
+		cooldownArma -= 0.4
 	}
 }
 
 const escopetero = new Personaje (vida = 20,arma = escopeta,cooldownArma = 3,habilidad = new Trampa(),cooldownHabilidad = 10,imagenDerecha="escopetero derecha.png",imagenIzquierda="escopetero izquierda.png",imagenMenu="escopetero menu1.png")
 const franco = new Personaje (vida = 15,arma = francotirador,cooldownArma = 5,habilidad = new DisparoCertero(),cooldownHabilidad = 15,imagenDerecha="sniper chiquito.png",imagenIzquierda="sniper izquierda.png",imagenMenu="sniper.png")
-const ingeniero = new Personaje (vida = 10,arma = pistola,cooldownArma = 1,habilidad = new Granada(),cooldownHabilidad = 7,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")
+const ingeniero = new Personaje (vida = 10,arma = pistola,cooldownArma = 2,habilidad = new Granada(),cooldownHabilidad = 7,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")

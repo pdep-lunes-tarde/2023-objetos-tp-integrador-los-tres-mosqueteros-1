@@ -41,7 +41,7 @@ class Enemigo inherits Direccion {
 	
 	method perseguir (pj) {
 		if(not self.estaStuneado()) {
-			game.onCollideDo(self,{algo => if (algo.esTrampa()) {algo.activar(self)} if(algo.esPersonaje()){algo.recibirDanio(danio)}})
+			game.onCollideDo(self,{algo => if (algo.esTrampa()) {algo.activar(self)} if(algo.esPersonaje()){algo.recibirDanio(danio)} if(algo.esEnemigo()){}})
 			if (pj.position().x()>self.position().x()){
 			position = este.siguientePosicion(self)
 			self.stun(velocidadDeMovimiento)

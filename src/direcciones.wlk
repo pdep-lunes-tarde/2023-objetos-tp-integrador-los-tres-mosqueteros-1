@@ -1,13 +1,41 @@
 import obstaculos.*
 import wollok.game.*
 
+class Posicion {
+	var property x = 0
+	var property y = 0
+	
+	method right(n) {
+		x += 1
+		return self
+	}
+	
+	method left(n) {
+		x -= 1
+		return self
+	}
+	
+	method up(n) {
+		y += 1
+		return self
+	}
+	
+	method down(n) {
+		y -= 1
+		return self
+	}
+	
+	method allElements() = game.getObjectsIn(self)
+	
+}
+
 class Direccion {
-	var property position = game.origin()
-	var property siguientePos = game.origin()
+	var property position = new Posicion (x=0,y=0)
+	var property siguientePos = new Posicion (x=0,y=0)
 		
 	method siguientePosicion (objeto) 
 	
-	method direccionOpuesta () = norte
+
 }
 
 
@@ -18,22 +46,21 @@ object sur inherits Direccion {
 		position = objeto.position()
 		siguientePos = objeto.position().down(1)
 		
-		if(not siguientePos.allElements().filter{elemento => obstaculos.contains(elemento)}.isEmpty()){
+		if(not siguientePos.allElements().filter{elemento => obstaculos.contains(elemento)}.isEmpty() or siguientePos.allElements().any({elemento => elemento.esEnemigo()})){
 			return position
 		}
 		
 		return siguientePos
 		
 		}	
-		
-		override method direccionOpuesta() = norte
 }
 
 object norte inherits Direccion {
 	
 	 override method siguientePosicion (objeto) {
 		position = objeto.position()
-		siguientePos = objeto.position().up(1)
+		
+		siguientePos = game.at(objeto.position().up(1).x(),objeto.position().up(1).y())
 		
 		if(not siguientePos.allElements().filter{elemento => obstaculos.contains(elemento)}.isEmpty()){
 			return position
@@ -42,9 +69,8 @@ object norte inherits Direccion {
 		return siguientePos
 		
 		}	
-		
-		override method direccionOpuesta() = sur
 }
+
 object este inherits Direccion {
 	
 		override method siguientePosicion (objeto) {
@@ -58,10 +84,8 @@ object este inherits Direccion {
 		return siguientePos
 		
 		}
-		
-		override method direccionOpuesta() = oeste
-			
 }
+
 object oeste inherits Direccion {
 
 	    override method siguientePosicion (objeto) {
@@ -75,6 +99,4 @@ object oeste inherits Direccion {
 		return siguientePos
 		
 		}	
-		
-		override method direccionOpuesta() = este
 }
