@@ -81,13 +81,13 @@ class Enemigo inherits Direccion {
 }
 
 
-const zombie = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 1)
-const zombieFuerte = new Enemigo (position = game.at(30,10),vida = 50,imagen = "zombieDosChiquito.png", danio = 5,velocidadDeMovimiento = 1)
-const zombieTanque = new Enemigo (position = game.at(30,10),vida = 100,imagen = "zombieTresChiquito.png", danio = 10,velocidadDeMovimiento = 2)
+const zombie = new Enemigo (position = game.at(30,10),vida = 10,imagen = "zombieChiquito.png", danio = 3,velocidadDeMovimiento = 0.8)
+const zombieFuerte = new Enemigo (position = game.at(30,10),vida = 50,imagen = "zombieDosChiquito.png", danio = 5,velocidadDeMovimiento = 0.8)
+const zombieTanque = new Enemigo (position = game.at(30,10),vida = 100,imagen = "zombieTresChiquito.png", danio = 10,velocidadDeMovimiento = 1.5)
 const zombieFlash = new Enemigo (position = game.at(30,10),vida = 1,imagen = "zombieChiquito.png", danio = 2,velocidadDeMovimiento = 0.1)
-const zombieCurtido = new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 1)
-const zombieFantasma = new Enemigo (position = game.at(30,10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.7)
-const zombieCasiElite = new Enemigo (position = game.at(30,10),vida = 60,imagen = "zombieChiquito.png", danio = 6,velocidadDeMovimiento = 1)
-const zombieElite = new Enemigo (position = game.at(30,10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 1)
-const zombieUltraTanque = new Enemigo (position = game.at(30,10),vida = 200,imagen = "zombieChiquito.png", danio = 20,velocidadDeMovimiento = 2.5)
-const Boss = new Enemigo (position = game.at(30,10),vida = 2000,imagen = "zombieChiquito.png", danio = 100,velocidadDeMovimiento = 4.5)
+const zombieCurtido = new Enemigo (position = game.at(30,10),vida = 15,imagen = "zombieChiquito.png", danio = 4,velocidadDeMovimiento = 0.8)
+const zombieFantasma = new Enemigo (position = game.at(30,10),vida = 5,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.5)
+const zombieCasiElite = new Enemigo (position = game.at(30,10),vida = 60,imagen = "zombieChiquito.png", danio = 6,velocidadDeMovimiento = 0.8)
+const zombieElite = new Enemigo (position = game.at(30,10),vida = 70,imagen = "zombieChiquito.png", danio = 7,velocidadDeMovimiento = 0.8)
+const zombieUltraTanque = new Enemigo (position = game.at(30,10),vida = 200,imagen = "zombieChiquito.png", danio = 20,velocidadDeMovimiento = 2)
+const Boss = new Enemigo (position = game.at(30,10),vida = 2000,imagen = "zombieChiquito.png", danio = 100,velocidadDeMovimiento = 3)

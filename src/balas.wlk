@@ -71,7 +71,7 @@ class CalibreFranco inherits Bala {
 		if (rango>0){
 			position = direccion.siguientePosicion(self)
 			distanciaViajada ++
-			danio += distanciaViajada
+			danio += distanciaViajada/2
 			game.onCollideDo(self,{enemigo => if(enemigo.esEnemigo()){enemigo.recibirDanio(self) self.borrarBala() rango=0}})
 			rango --
 		}

@@ -2,6 +2,6 @@ import tp.*
 import wollok.game.*
 
 program juego {
-	tpIntegrador.menu()
+	tpIntegrador.menuPrincipal()
 	game.start()
 }

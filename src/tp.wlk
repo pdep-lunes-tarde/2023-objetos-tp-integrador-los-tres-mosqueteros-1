@@ -7,7 +7,7 @@ import direcciones.*
 import menu.*
 import enemigos.*
 
-const musicaJuego = game.sound("Sounds/MusicaJuego.mp3")
+const musicaJuego = game.sound("MusicaJuego.mp3")
 const musicaMenu = game.sound("MusicaMenu.mp3")
 
 object tpIntegrador {
@@ -24,8 +24,8 @@ object tpIntegrador {
 		selector = 0
 		enemigosEnPantalla = []
 		utilidadesEnPantalla = []
-//		musicaJuego.stop()
-		self.menu()
+		musicaJuego.stop()
+		self.menuPrincipal()
 	}
 	
 	method agregarUtilidad (bala) {
@@ -42,26 +42,45 @@ object tpIntegrador {
 		game.cellSize(40)
 	}
 	
-	method menu() {
+	method elegirMenu (numero) {
+		if (numero == 10) {self.menuPrincipal()}
+		if (numero == 0) {self.menuPersonajes()}
+		if (numero == 1) {self.menuInstrucciones()}
+		if (numero == 2) {game.stop()}
+	}
+	
+	method menuPrincipal() {
 		game.clear()
 		self.inicializarPantalla()
 		game.boardGround("calle.png")
 		game.addVisualIn(escopetero,game.at(2,10))
 		game.addVisualIn(franco,game.at(12,10))
 		game.addVisualIn(ingeniero,game.at(22,10))
+		game.addVisualIn(jugar,game.at(3,7))
+		game.addVisualIn(manito,game.at(11,9))
+		game.addVisualIn(instrucciones,game.at(3,5))
+		game.addVisualIn(salir,game.at(3,3))
+		musicaMenu.shouldLoop(true)
+		musicaMenu.volume(0.3)
+		sonidoMenu.volume(0.1)
+		game.onTick(1,"poner musica",{musicaMenu.play() game.removeTickEvent("poner musica")})
 
-//		musicaMenu.shouldLoop(true)
-//		musicaMenu.volume(0.3)
-//		musicaMenu.play()
-		
 		var seleccion = 0
-		keyboard.right().onPressDo{seleccion = 2.min(seleccion+1)}
+
+		keyboard.down().onPressDo{seleccion = 2.min(seleccion+1) manito.posicionarse(seleccion)}
+		keyboard.up().onPressDo{seleccion = 0.max(seleccion-1) manito.posicionarse(seleccion)}
+			
+		keyboard.enter().onPressDo{self.elegirMenu(seleccion)}
+			
+//		keyboard.enter().onPressDo{personajeElegido = eleccionPersonaje.seleccion(seleccion) personajeElegido.imagen(personajeElegido.imagenDerecha()) self.jugar()}
 		
-		keyboard.left().onPressDo{seleccion = 0.max(seleccion-1)}
-		
-		
-		keyboard.enter().onPressDo{personajeElegido = eleccion.seleccion(seleccion) personajeElegido.imagen(personajeElegido.imagenDerecha()) self.jugar()}
-		
+	}
+	
+	method menuPersonajes() {
+		game.clear()
+		game.addVisualIn(escopetero,game.at(2,10))
+		game.addVisualIn(franco,game.at(12,10))
+		game.addVisualIn(ingeniero,game.at(22,10))
 	}
 	
 	method jugar() {
@@ -71,10 +90,10 @@ object tpIntegrador {
 
 
 		game.clear()
-//		musicaMenu.pause()
-//		musicaJuego.shouldLoop(true)
-//		musicaJuego.volume(0.3)
-//		musicaJuego.play()
+		musicaMenu.stop()
+		musicaJuego.shouldLoop(true)
+		musicaJuego.volume(0.3)
+		game.onTick(1,"poner musica juego",{musicaJuego.play() game.removeTickEvent("poner musica juego")})
 		game.addVisual(personajeElegido) 
 		obstaculos.forEach({obstaculo => game.addVisual(obstaculo)})
 		game.onTick(2000,"spawn enemigo",{
@@ -82,7 +101,7 @@ object tpIntegrador {
 			enemigos.first().spawn()  enemigosEnPantalla.add(enemigos.first()) enemigos.remove(enemigos.first())
 			}
 		})
-		game.onTick(500,"enemigo persigue",{
+		game.onTick(350,"enemigo persigue",{
 			if (not enemigosEnPantalla.isEmpty()){
 				enemigosEnPantalla.forEach({x => x.perseguir(personajeElegido)})
 		}})

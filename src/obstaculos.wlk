@@ -2,6 +2,8 @@ import wollok.game.*
 
 class Obstaculo{ //mover a otro archivo llamado "obstaculos", en el momento no pude hacerlo
 	var property position = self.posInicial()
+	var property esTrampa = false
+	var property esPersonaje = false
 	method image()= "auto_destruido.png"
 	
 	method posInicial() {
