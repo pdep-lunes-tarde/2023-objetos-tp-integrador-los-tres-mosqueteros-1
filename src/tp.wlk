@@ -70,17 +70,25 @@ object tpIntegrador {
 		keyboard.down().onPressDo{seleccion = 2.min(seleccion+1) manito.posicionarse(seleccion)}
 		keyboard.up().onPressDo{seleccion = 0.max(seleccion-1) manito.posicionarse(seleccion)}
 			
-		keyboard.enter().onPressDo{self.elegirMenu(seleccion)}
-			
-//		keyboard.enter().onPressDo{personajeElegido = eleccionPersonaje.seleccion(seleccion) personajeElegido.imagen(personajeElegido.imagenDerecha()) self.jugar()}
-		
+		keyboard.enter().onPressDo{self.elegirMenu(seleccion)}		
 	}
 	
 	method menuPersonajes() {
 		game.clear()
+		var seleccion = 0
 		game.addVisualIn(escopetero,game.at(2,10))
 		game.addVisualIn(franco,game.at(12,10))
 		game.addVisualIn(ingeniero,game.at(22,10))
+		game.addVisualIn(manito,game.at(1,12))
+		
+		keyboard.right().onPressDo{seleccion = 2.min(seleccion+1) manito.posicionarse(seleccion+3)}
+		keyboard.left().onPressDo{seleccion = 0.max(seleccion-1) manito.posicionarse(seleccion+3)}
+		
+		keyboard.enter().onPressDo{personajeElegido = eleccionPersonaje.seleccion(seleccion) personajeElegido.imagen(personajeElegido.imagenDerecha()) self.jugar()}
+	}
+	
+	method menuInstrucciones() {
+		
 	}
 	
 	method jugar() {

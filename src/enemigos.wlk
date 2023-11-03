@@ -16,7 +16,6 @@ class Enemigo inherits Direccion {
 	var property velocidadDeMovimiento
 	
 	method recibirDanio (objetoDanino) {
-//		game.say(self,"auchis")
 		vida -= objetoDanino.danio()
 		if (vida <= 0) {
 			self.borrar()

@@ -65,13 +65,13 @@ class Bala {
 class CalibreFranco inherits Bala {
 	var distanciaViajada = 0
 	
-	override method creaBala (pj) = new CalibreFranco (danio = 1 , imagen = "bala.png" , rango = 15)
+	override method creaBala (pj) = new CalibreFranco (danio = 0.5 , imagen = "bala.png" , rango = 15)
 	
 	override method viajar (pj) {
 		if (rango>0){
 			position = direccion.siguientePosicion(self)
 			distanciaViajada ++
-			danio += distanciaViajada/2
+			danio += distanciaViajada 
 			game.onCollideDo(self,{enemigo => if(enemigo.esEnemigo()){enemigo.recibirDanio(self) self.borrarBala() rango=0}})
 			rango --
 		}
