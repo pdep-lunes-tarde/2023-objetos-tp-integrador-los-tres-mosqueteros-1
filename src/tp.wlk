@@ -24,7 +24,7 @@ object tpIntegrador {
 		selector = 0
 		enemigosEnPantalla = []
 		utilidadesEnPantalla = []
-		musicaJuego.stop()
+		musicaJuego.pause()
 		self.menuPrincipal()
 	}
 	
@@ -63,7 +63,7 @@ object tpIntegrador {
 		musicaMenu.shouldLoop(true)
 		musicaMenu.volume(0.3)
 		sonidoMenu.volume(0.1)
-		game.onTick(1,"poner musica",{musicaMenu.play() game.removeTickEvent("poner musica")})
+		game.onTick(1,"poner musica",{if (not musicaMenu.played()) {musicaMenu.play()game.removeTickEvent("poner musica")} if(musicaMenu.paused()){musicaMenu.resume()}})
 
 		var seleccion = 0
 
@@ -88,7 +88,17 @@ object tpIntegrador {
 	}
 	
 	method menuInstrucciones() {
+		game.clear()
+		game.addVisualIn(z,game.at(6,10))
+		game.addVisualIn(x,game.at(6,7))
+		game.addVisualIn(flechitas,game.at(5,13))
+		game.addVisualIn(q,game.at(6,4))
+		game.addVisualIn(disparar,game.at(1,9))
+		game.addVisualIn(habilidad,game.at(4,6))
+		game.addVisualIn(movimiento,game.at(4,12))
+		game.addVisualIn(menu,game.at(0,3))
 		
+		keyboard.q().onPressDo{self.menuPrincipal()}
 	}
 	
 	method jugar() {
@@ -98,10 +108,10 @@ object tpIntegrador {
 
 
 		game.clear()
-		musicaMenu.stop()
+		musicaMenu.pause()
 		musicaJuego.shouldLoop(true)
 		musicaJuego.volume(0.3)
-		game.onTick(1,"poner musica juego",{musicaJuego.play() game.removeTickEvent("poner musica juego")})
+		game.onTick(1,"poner musica juego",{if (not musicaJuego.played()) {musicaJuego.play() game.removeTickEvent("poner musica juego")} if(musicaJuego.paused()){musicaJuego.resume()}})
 		game.addVisual(personajeElegido) 
 		obstaculos.forEach({obstaculo => game.addVisual(obstaculo)})
 		game.onTick(2000,"spawn enemigo",{
@@ -143,6 +153,7 @@ object tpIntegrador {
 		keyboard.right().onPressDo{personajeElegido.direction(este) personajeElegido.imagen(personajeElegido.imagenDerecha())}
 		keyboard.left().onPressDo{personajeElegido.direction(oeste) personajeElegido.imagen(personajeElegido.imagenIzquierda())}
 		keyboard.x().onPressDo{personajeElegido.lanzarHabilidad()}
+		keyboard.q().onPressDo{self.menuPrincipal() self.resetearValores()}
 		
 		game.onTick(200,"viajeUtilidades",{utilidadesEnPantalla.forEach{x => x.viajar(personajeElegido)}})
 	}

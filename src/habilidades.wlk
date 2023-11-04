@@ -5,7 +5,7 @@ import tp.*
 class Trampa {
 	var property esTrampa = true
 	var property esPersonaje = false
-	var property position = game.origin()
+	var property position = new Posicion (x=0,y=0)
 	var property danio = 7
 	var property esEnemigo = false
 	var property tiempoActiva = 10
@@ -50,7 +50,7 @@ class Granada {
 	var property esPersonaje = false
 	var property position = game.origin()
 	var property direccion = sur
-	var property danio = 8
+	var property danio = 20
 	var rango = 10
 	
 	method lanzar (pj) {
@@ -95,7 +95,7 @@ class DisparoCertero  {
 	var property esPersonaje = false
 	var property position = game.origin()
 	var property direccion = sur
-	var property danio = 20
+	var property danio = 8
 	var rango = 15
 	
 	method lanzar (pj) {

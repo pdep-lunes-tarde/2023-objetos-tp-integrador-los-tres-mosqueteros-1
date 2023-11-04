@@ -45,5 +45,14 @@ object manito {
 const jugar = new Texto (image="jugar.png")
 const instrucciones = new Texto (image="instrucciones.png")
 const salir = new Texto (image="salir.png")
+const disparar = new Texto (image="disparar.png")
+const habilidad = new Texto (image="habilidad.png")
+const menu = new Texto (image="menu.png")
+const movimiento = new Texto (image="movimiento.png")
+
+const flechitas = new Texto (image="flechas.png")
+const z = new Texto (image="zGr.png")
+const x = new Texto (image="xGr.png")
+const q = new Texto (image="qGr.png")
 
 const sonidoMenu = game.sound("sonidoMenu.mp3")
