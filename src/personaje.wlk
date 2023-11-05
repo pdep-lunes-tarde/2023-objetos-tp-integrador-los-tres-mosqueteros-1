@@ -6,6 +6,7 @@ import direcciones.*
 import tp.*
 import obstaculos.*
 import enemigos.*
+import menu.*
 
 class Personaje  {
 	var property esTrampa = false
@@ -14,6 +15,7 @@ class Personaje  {
 	
 	var property recibioDanioHacePoco = false
 	var property vida
+	var property corazones 
 	var property arma
 	var property habilidad
 	
@@ -41,6 +43,9 @@ class Personaje  {
 		return direction.siguientePosicion(self)	
 	}
 	
+	method inicializarCorazones(){
+		corazones.forEach({x => x.ponerCorazon()})
+	}
 	
 	method correr(dir){
 		direction = dir
@@ -57,17 +62,19 @@ class Personaje  {
 	
 	method recibirDanio (cantidad) {
 		if (not recibioDanioHacePoco) {
+			corazonesInterfaz.sacarVida(vida)
 			vida -= cantidad
 			if (vida <= 0){
 			self.morir()
 			}
 			self.recibioDanioHacePoco(true)
-			game.schedule(500,{self.recibioDanioHacePoco(false)})
+			game.schedule(700,{self.recibioDanioHacePoco(false)})
 		}
 	} 
 	
 	method curar (cantidad) {
 		vida += cantidad
+		corazonesInterfaz.ponerVida(vida)
 	}
 	
 	method morir () {
@@ -96,7 +103,7 @@ class Personaje  {
 	
 	method mejorar () {
 		habilidad.mejorar(self)
-		vida += 5
+		self.curar(1)
 		game.say(self,"Me siento mas fuerte!")
 	}
 	
@@ -114,6 +121,6 @@ class Ingeniero inherits Personaje {
 	}
 }
 
-const escopetero = new Personaje (vida = 5,arma = escopeta,cooldownArma = 3,habilidad = new Trampa(),cooldownHabilidad = 10,imagenDerecha="escopetero derecha.png",imagenIzquierda="escopetero izquierda.png",imagenMenu="escopetero menu1.png")
-const franco = new Personaje (vida = 2,arma = francotirador,cooldownArma = 5,habilidad = new DisparoCertero(),cooldownHabilidad = 15,imagenDerecha="sniper chiquito.png",imagenIzquierda="sniper izquierda.png",imagenMenu="sniper.png")
-const ingeniero = new Personaje (vida = 3,arma = pistola,cooldownArma = 2,habilidad = new Granada(),cooldownHabilidad = 9,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")
+const escopetero = new Personaje (vida = 5,corazones=[vidaUno,vidaDos,vidaTres,vidaCuatro,vidaCinco],arma = escopeta,cooldownArma = 3,habilidad = new Trampa(),cooldownHabilidad = 10,imagenDerecha="escopetero derecha.png",imagenIzquierda="escopetero izquierda.png",imagenMenu="escopetero menu1.png")
+const franco = new Personaje (vida = 2,corazones=[vidaUno,vidaDos],arma = francotirador,cooldownArma = 5,habilidad = new DisparoCertero(),cooldownHabilidad = 15,imagenDerecha="sniper chiquito.png",imagenIzquierda="sniper izquierda.png",imagenMenu="sniper.png")
+const ingeniero = new Personaje (vida = 3,corazones=[vidaUno,vidaDos,vidaTres],arma = pistola,cooldownArma = 2,habilidad = new Granada(),cooldownHabilidad = 9,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")

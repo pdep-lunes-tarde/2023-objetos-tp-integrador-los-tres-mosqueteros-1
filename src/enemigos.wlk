@@ -29,7 +29,7 @@ class Enemigo inherits Direccion {
 	
 	method stun (tiempo) {
 		self.estaStuneado(true)
-		game.schedule(1000*tiempo,{self.estaStuneado(false)})
+		game.schedule(500*tiempo,{self.estaStuneado(false)})
 	}
 	
 	method spawn () {

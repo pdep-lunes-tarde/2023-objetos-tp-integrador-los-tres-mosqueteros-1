@@ -6,7 +6,7 @@ class Trampa {
 	var property esTrampa = true
 	var property esPersonaje = false
 	var property position = new Posicion (x=0,y=0)
-	var property danio = 7
+	var property danio = 10
 	var property esEnemigo = false
 	var property tiempoActiva = 10
 	
@@ -23,7 +23,7 @@ class Trampa {
 	method activar (entidad) {
 		if (entidad.esEnemigo()){
 			entidad.recibirDanio(self)
-			entidad.stun(5)
+			entidad.stun(100)
 			game.removeVisual(self)
 		}
 			
@@ -36,7 +36,7 @@ class Trampa {
 	}
 	
 	method mejorar (pj) {
-		danio += 2
+		danio += 10
 		tiempoActiva += 2
 		pj.cooldownHabilidad(pj.cooldownHabilidad()-3)
 	}
@@ -80,7 +80,7 @@ class Granada {
 	}
 	
 	method mejorar (pj) {
-		danio += 5
+		danio += 20
 		rango += 2
 		pj.cooldownHabilidad(pj.cooldownHabilidad()-1)
 	}
@@ -95,7 +95,7 @@ class DisparoCertero  {
 	var property esPersonaje = false
 	var property position = game.origin()
 	var property direccion = sur
-	var property danio = 8
+	var property danio = 20
 	var rango = 15
 	
 	method lanzar (pj) {
@@ -109,7 +109,7 @@ class DisparoCertero  {
 	method viajar (pj) {
 		if (rango>0){
 			position = direccion.siguientePosicion(self)
-			game.onCollideDo(self,{enemigo => if (enemigo.esEnemigo()){enemigo.recibirDanio(self) enemigo.stun(5) rango = 0}})
+			game.onCollideDo(self,{enemigo => if (enemigo.esEnemigo()){enemigo.recibirDanio(self) enemigo.stun(100) rango = 0}})
 			rango --
 		}
 		else {self.eliminarse()}
@@ -127,6 +127,6 @@ class DisparoCertero  {
 		pj.cooldownHabilidad(pj.cooldownHabilidad()-2)
 	}
 	
-	method image () = "bala.png"
+	method image () = "balaGr.png"
 	
 }

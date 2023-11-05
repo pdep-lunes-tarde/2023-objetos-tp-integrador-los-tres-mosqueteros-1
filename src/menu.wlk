@@ -1,16 +1,6 @@
 import personaje.*
 import wollok.game.*
 
-//object eleccionPersonaje {
-//	const personajes = [escopetero,franco,ingeniero]
-//	var property personajeElegido = 0
-//	
-//	method seleccion (numero) {
-//		personajeElegido = personajes.get(numero)
-//		return personajeElegido
-//	}
-//}
-
 class Eleccion {
 	const opciones 
 	var property opcionElegida = 0
@@ -88,6 +78,42 @@ object menuPj {
 		game.addVisualIn(self.barrita(),game.at(28,4))
 	}
 }
+
+object corazonesInterfaz {
+	method sacarVida (numero) {
+		if(numero == 5){vidaCinco.sacarCorazon()}
+		if(numero == 4){vidaCuatro.sacarCorazon()}
+		if(numero == 3){vidaTres.sacarCorazon()}
+		if(numero == 2){vidaDos.sacarCorazon()}
+		if(numero == 1){vidaUno.sacarCorazon()}
+	}
+	method ponerVida (numero) {
+		if(numero == 5){vidaCinco.ponerCorazon()}
+		if(numero == 4){vidaCuatro.ponerCorazon()}
+		if(numero == 3){vidaTres.ponerCorazon()}
+		if(numero == 2){vidaDos.ponerCorazon()}
+		if(numero == 1){vidaUno.ponerCorazon()}
+	}
+}
+
+class Corazon {
+	const posicion 
+	var property image = "corazonChiquito.png"
+	method ponerCorazon () {
+		game.addVisualIn(self,posicion)
+		return 1
+	}
+	method sacarCorazon() {
+		game.removeVisual(self)
+		return 1
+	}
+}
+
+const vidaUno = new Corazon (posicion = game.at(0,17))
+const vidaDos = new Corazon (posicion = game.at(1,17))
+const vidaTres = new Corazon (posicion = game.at(2,17))
+const vidaCuatro = new Corazon (posicion = game.at(3,17))
+const vidaCinco  = new Corazon (posicion = game.at(4,17))
 
 const jugar = new Texto (image="jugar.png")
 const instrucciones = new Texto (image="instrucciones.png")

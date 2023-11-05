@@ -86,7 +86,7 @@ class Cartucho inherits Bala {
 	override method viajar (pj) {
 		if (rango>0){
 			position = direccion.siguientePosicion(self)
-			game.onCollideDo(self,{enemigo => if(enemigo.esEnemigo()){enemigo.recibirDanio(self) self.borrarBala() rango=0 pj.curar(1)}})
+			game.onCollideDo(self,{enemigo => if(enemigo.esEnemigo()){enemigo.recibirDanio(self) self.borrarBala() rango=0 enemigo.stun(10)}})
 			rango --
 		}
 		else {self.borrarBala()}

@@ -129,6 +129,7 @@ object tpIntegrador {
 		musicaJuego.volume(0.3)
 		game.onTick(1,"poner musica juego",{if (not musicaJuego.played()) {musicaJuego.play() game.removeTickEvent("poner musica juego")} if(musicaJuego.paused()){musicaJuego.resume()}})
 		game.addVisual(personajeElegido) 
+		personajeElegido.inicializarCorazones()
 		obstaculos.forEach({obstaculo => game.addVisual(obstaculo)})
 		game.onTick(2000,"spawn enemigo",{
 			if (not enemigos.isEmpty()){
