@@ -42,6 +42,53 @@ object manito {
 	}
 }
 
+object menuPj {
+	method danio () = new Texto (image="dañoC.png")
+	method vida () = new Texto (image="vidaC.png")
+	method escalado () = new Texto (image="escaladoC.png")
+	method barrita () = new Texto (image="barraC.png")
+	method barrasEscopetero () {
+		game.addVisualIn(self.barrita(),game.at(4,6))
+		game.addVisualIn(self.barrita(),game.at(5,6))
+		game.addVisualIn(self.barrita(),game.at(6,6))
+		game.addVisualIn(self.barrita(),game.at(7,6))
+		game.addVisualIn(self.barrita(),game.at(8,6))
+		
+		game.addVisualIn(self.barrita(),game.at(4,8))
+		game.addVisualIn(self.barrita(),game.at(5,8))
+		game.addVisualIn(self.barrita(),game.at(6,8))
+		
+		game.addVisualIn(self.barrita(),game.at(4,4))
+		game.addVisualIn(self.barrita(),game.at(5,4))
+	}
+	method barrasFranco() {
+		game.addVisualIn(self.barrita(),game.at(14,6))
+		game.addVisualIn(self.barrita(),game.at(15,6))
+		
+		game.addVisualIn(self.barrita(),game.at(14,8))
+		game.addVisualIn(self.barrita(),game.at(15,8))
+		game.addVisualIn(self.barrita(),game.at(16,8))
+		game.addVisualIn(self.barrita(),game.at(17,8))
+		game.addVisualIn(self.barrita(),game.at(18,8))
+		
+		game.addVisualIn(self.barrita(),game.at(14,4))
+		game.addVisualIn(self.barrita(),game.at(15,4))
+	}
+	method barrasIng () {
+		game.addVisualIn(self.barrita(),game.at(24,6))
+		game.addVisualIn(self.barrita(),game.at(25,6))
+		game.addVisualIn(self.barrita(),game.at(26,6))
+		
+		game.addVisualIn(self.barrita(),game.at(24,8))
+		
+		game.addVisualIn(self.barrita(),game.at(24,4))
+		game.addVisualIn(self.barrita(),game.at(25,4))
+		game.addVisualIn(self.barrita(),game.at(26,4))
+		game.addVisualIn(self.barrita(),game.at(27,4))
+		game.addVisualIn(self.barrita(),game.at(28,4))
+	}
+}
+
 const jugar = new Texto (image="jugar.png")
 const instrucciones = new Texto (image="instrucciones.png")
 const salir = new Texto (image="salir.png")
@@ -54,5 +101,6 @@ const flechitas = new Texto (image="flechas.png")
 const z = new Texto (image="zGr.png")
 const x = new Texto (image="xGr.png")
 const q = new Texto (image="qGr.png")
+
 
 const sonidoMenu = game.sound("sonidoMenu.mp3")

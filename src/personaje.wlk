@@ -115,5 +115,5 @@ class Ingeniero inherits Personaje {
 }
 
 const escopetero = new Personaje (vida = 5,arma = escopeta,cooldownArma = 3,habilidad = new Trampa(),cooldownHabilidad = 10,imagenDerecha="escopetero derecha.png",imagenIzquierda="escopetero izquierda.png",imagenMenu="escopetero menu1.png")
-const franco = new Personaje (vida = 4,arma = francotirador,cooldownArma = 5,habilidad = new DisparoCertero(),cooldownHabilidad = 15,imagenDerecha="sniper chiquito.png",imagenIzquierda="sniper izquierda.png",imagenMenu="sniper.png")
+const franco = new Personaje (vida = 2,arma = francotirador,cooldownArma = 5,habilidad = new DisparoCertero(),cooldownHabilidad = 15,imagenDerecha="sniper chiquito.png",imagenIzquierda="sniper izquierda.png",imagenMenu="sniper.png")
 const ingeniero = new Personaje (vida = 3,arma = pistola,cooldownArma = 2,habilidad = new Granada(),cooldownHabilidad = 9,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")

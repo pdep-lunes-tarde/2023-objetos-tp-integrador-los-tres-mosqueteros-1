@@ -13,7 +13,7 @@ class Bala {
 	var property rango 
 	var property imagen
 	
-	method creaBala (pj) = new Bala (danio = 1 , imagen = "bala.png" , rango = 7)
+	method creaBala (pj) = new Bala (danio = 6 , imagen = "bala.png" , rango = 7)
 	
 	method spawn (pj) {
 		direccion = pj.direction()
@@ -81,7 +81,7 @@ class CalibreFranco inherits Bala {
 
 class Cartucho inherits Bala {
 	
-	override method creaBala (pj) = new Cartucho (danio = 7 , imagen = "bala.png" , rango = 5)
+	override method creaBala (pj) = new Cartucho (danio = 10 , imagen = "bala.png" , rango = 5)
 	
 	override method viajar (pj) {
 		if (rango>0){
