@@ -35,7 +35,8 @@ class Personaje  {
 	var property imagen = imagenMenu
 	
 	var property direction = sur
-	var property position = new Posicion (x=0,y=0)	
+	var property position
+	var property posicionInicial = position
 
 	method image() = imagen
 	
@@ -60,10 +61,10 @@ class Personaje  {
 		}
 	}
 	
-	method recibirDanio (cantidad) {
+	method recibirDanio (objeto) {
 		if (not recibioDanioHacePoco) {
 			corazonesInterfaz.sacarVida(vida)
-			vida -= cantidad
+			vida -= objeto.danio()
 			if (vida <= 0){
 			self.morir()
 			}
@@ -82,11 +83,11 @@ class Personaje  {
 	}
 	
 	method resetearValores () {
-		arma = armaInicial
-		habilidad = habilidadInicial
+//		arma = armaInicial
+//		habilidad = habilidadInicial
 		vida = vidaInicial
 		imagen = imagenMenu
-		position = new Posicion (x=0,y=0)
+		position = posicionInicial
 	}
 	
 	method lanzarHabilidad () {
@@ -121,6 +122,27 @@ class Ingeniero inherits Personaje {
 	}
 }
 
-const escopetero = new Personaje (vida = 5,corazones=[vidaUno,vidaDos,vidaTres,vidaCuatro,vidaCinco],arma = escopeta,cooldownArma = 3,habilidad = new Trampa(),cooldownHabilidad = 10,imagenDerecha="escopetero derecha.png",imagenIzquierda="escopetero izquierda.png",imagenMenu="escopetero menu1.png")
-const franco = new Personaje (vida = 2,corazones=[vidaUno,vidaDos],arma = francotirador,cooldownArma = 5,habilidad = new DisparoCertero(),cooldownHabilidad = 15,imagenDerecha="sniper chiquito.png",imagenIzquierda="sniper izquierda.png",imagenMenu="sniper.png")
-const ingeniero = new Personaje (vida = 3,corazones=[vidaUno,vidaDos,vidaTres],arma = pistola,cooldownArma = 2,habilidad = new Granada(),cooldownHabilidad = 9,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")
+class JugadorDos inherits Personaje {
+	override method recibirDanio (objeto) {
+		if (not recibioDanioHacePoco) {
+			corazonesInterfaz.sacarVida(vida+7)
+			vida -= objeto.danio()
+			if (vida <= 0){
+			self.morir()
+			}
+			self.recibioDanioHacePoco(true)
+			game.schedule(700,{self.recibioDanioHacePoco(false)})
+			}
+	} 
+	
+	override method curar (cantidad) {
+		vida += cantidad
+		corazonesInterfaz.ponerVida(vida+7)
+	}
+}
+
+const escopetero = new Personaje (position=new Posicion (x=0,y=10),vida = 5,corazones=[vidaUno,vidaDos,vidaTres,vidaCuatro,vidaCinco],arma = escopeta,cooldownArma = 3,habilidad = new Trampa(),cooldownHabilidad = 10,imagenDerecha="escopetero derecha.png",imagenIzquierda="escopetero izquierda.png",imagenMenu="escopetero menu1.png")
+const franco = new Personaje (position=new Posicion (x=0,y=10),vida = 2,corazones=[vidaUno,vidaDos],arma = francotirador,cooldownArma = 5,habilidad = new DisparoCertero(),cooldownHabilidad = 15,imagenDerecha="sniper chiquito.png",imagenIzquierda="sniper izquierda.png",imagenMenu="sniper.png")
+const ingeniero = new Personaje (position=new Posicion (x=0,y=10),vida = 3,corazones=[vidaUno,vidaDos,vidaTres],arma = pistola,cooldownArma = 2,habilidad = new Granada(),cooldownHabilidad = 9,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")
+const jugadorUno = new Personaje (position=new Posicion (x=0,y=10),vida=3,corazones=[vidaUno,vidaDos,vidaTres],arma = multi,cooldownArma=1,habilidad=new Granada(),cooldownHabilidad = 9,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")
+const jugadorDos = new JugadorDos (position=new Posicion (x=20,y=10),vida=3,corazones=[vidaUnoJ2,vidaDosJ2,vidaTresJ2],arma = multi,cooldownArma=1,habilidad=new Granada(),cooldownHabilidad = 9,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")

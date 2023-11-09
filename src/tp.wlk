@@ -20,10 +20,12 @@ object tpIntegrador {
 	
 	method resetearValores () {
 		personajeElegido.resetearValores()
+		jugadorUno.resetearValores()
+		jugadorDos.resetearValores()
 		oleadas.forEach({x => x.resetearValores()})
 		selector = 0
 		enemigosEnPantalla = []
-		utilidadesEnPantalla = []
+		utilidadesEnPantalla = new List ()
 		musicaJuego.pause()
 		self.menuPrincipal()
 	}
@@ -100,7 +102,7 @@ object tpIntegrador {
 		keyboard.left().onPressDo{seleccion = 0.max(seleccion-1) manito.posicionarse(seleccion+3)}
 		keyboard.q().onPressDo{self.menuPrincipal()}
 		
-		keyboard.enter().onPressDo{personajeElegido = eleccionPersonaje.seleccion(seleccion) personajeElegido.imagen(personajeElegido.imagenDerecha()) self.jugar()}
+		keyboard.enter().onPressDo{personajeElegido = eleccionPersonaje.seleccion(seleccion) personajeElegido.imagen(personajeElegido.imagenDerecha()) self.jugarDos()}
 	}
 	
 	method menuInstrucciones() {
@@ -117,7 +119,7 @@ object tpIntegrador {
 		keyboard.q().onPressDo{self.menuPrincipal()}
 	}
 	
-	method jugar() {
+	method jugarUno() {
 
 		enemigos = self.elegirOleada()
 		var rondasHastaMejorar = 3
@@ -172,7 +174,50 @@ object tpIntegrador {
 		keyboard.x().onPressDo{personajeElegido.lanzarHabilidad()}
 		keyboard.q().onPressDo{self.menuPrincipal() self.resetearValores()}
 		
-		game.onTick(200,"viajeUtilidades",{utilidadesEnPantalla.forEach{x => x.viajar(personajeElegido)}})
+		game.onTick(100,"viajeUtilidades",{utilidadesEnPantalla.forEach{x => x.viajar(personajeElegido)}})
+	}
+	
+	method jugarDos () {
+		game.clear()
+		musicaMenu.pause()
+		musicaJuego.shouldLoop(true)
+		musicaJuego.volume(0.3)
+		game.onTick(1,"poner musica juego",{if (not musicaJuego.played()) {musicaJuego.play() game.removeTickEvent("poner musica juego")} if(musicaJuego.paused()){musicaJuego.resume()}})
+		jugadorUno.imagen(jugadorUno.imagenDerecha())
+		jugadorDos.imagen(jugadorDos.imagenIzquierda())
+		game.addVisual(jugadorUno)
+		game.addVisual(jugadorDos)
+		jugadorUno.inicializarCorazones()
+		jugadorDos.inicializarCorazones()
+		jugadorUno.esEnemigo(true)
+		jugadorDos.esEnemigo(true)
+		obstaculos.forEach({obstaculo => game.addVisual(obstaculo)})
+		
+		keyboard.up().onPressDo{jugadorDos.correr(norte)}
+		keyboard.down().onPressDo{jugadorDos.correr(sur)}
+		keyboard.right().onPressDo{jugadorDos.correr(este)}
+		keyboard.left().onPressDo{jugadorDos.correr(oeste)}
+				
+		keyboard.o().onPressDo{jugadorDos.disparar()}
+		keyboard.up().onPressDo{jugadorDos.direction(norte)}
+		keyboard.down().onPressDo{jugadorDos.direction(sur)}
+		keyboard.right().onPressDo{jugadorDos.direction(este) jugadorDos.imagen(jugadorDos.imagenDerecha())}
+		keyboard.left().onPressDo{jugadorDos.direction(oeste) jugadorDos.imagen(jugadorDos.imagenIzquierda())}
+		keyboard.p().onPressDo{jugadorDos.lanzarHabilidad()}
+		
+		keyboard.w().onPressDo{jugadorUno.correr(norte)}
+		keyboard.s().onPressDo{jugadorUno.correr(sur)}
+		keyboard.d().onPressDo{jugadorUno.correr(este)}
+		keyboard.a().onPressDo{jugadorUno.correr(oeste)}
+				
+		keyboard.v().onPressDo{jugadorUno.disparar()}
+		keyboard.w().onPressDo{jugadorUno.direction(norte)}
+		keyboard.s().onPressDo{jugadorUno.direction(sur)}
+		keyboard.d().onPressDo{jugadorUno.direction(este) jugadorUno.imagen(jugadorUno.imagenDerecha())}
+		keyboard.a().onPressDo{jugadorUno.direction(oeste) jugadorUno.imagen(jugadorUno.imagenIzquierda())}
+		keyboard.b().onPressDo{jugadorUno.lanzarHabilidad()}
+		
+		game.onTick(70,"viajeUtilidades",{utilidadesEnPantalla.forEach{x => x.viajar(personajeElegido)}})
 	}
 	
 	method elegirOleada () {

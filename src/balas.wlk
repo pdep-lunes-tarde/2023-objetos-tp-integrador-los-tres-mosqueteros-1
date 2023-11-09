@@ -104,3 +104,7 @@ class CalibreAk inherits Bala {
 class CalibreLigero inherits Bala {
 	override method creaBala (pj) = new Bala (rango = 14,imagen = "bala.png",danio = 6)
 }
+
+class Multi inherits Bala {
+	override method creaBala (pj) = new Bala (rango = 12,imagen = "bala.png",danio = 1)
+}

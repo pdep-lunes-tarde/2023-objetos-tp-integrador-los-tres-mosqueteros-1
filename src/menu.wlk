@@ -86,6 +86,9 @@ object corazonesInterfaz {
 		if(numero == 3){vidaTres.sacarCorazon()}
 		if(numero == 2){vidaDos.sacarCorazon()}
 		if(numero == 1){vidaUno.sacarCorazon()}
+		if(numero == 10){vidaTresJ2.sacarCorazon()}
+		if(numero == 9){vidaDosJ2.sacarCorazon()}
+		if(numero == 8){vidaUnoJ2.sacarCorazon()}
 	}
 	method ponerVida (numero) {
 		if(numero == 5){vidaCinco.ponerCorazon()}
@@ -114,6 +117,10 @@ const vidaDos = new Corazon (posicion = game.at(1,17))
 const vidaTres = new Corazon (posicion = game.at(2,17))
 const vidaCuatro = new Corazon (posicion = game.at(3,17))
 const vidaCinco  = new Corazon (posicion = game.at(4,17))
+
+const vidaUnoJ2 = new Corazon (posicion = game.at(27,17))
+const vidaDosJ2 = new Corazon (posicion = game.at(28,17))
+const vidaTresJ2 = new Corazon (posicion = game.at(29,17))
 
 const jugar = new Texto (image="jugar.png")
 const instrucciones = new Texto (image="instrucciones.png")
