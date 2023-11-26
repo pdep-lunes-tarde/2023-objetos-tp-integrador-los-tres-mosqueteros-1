@@ -83,17 +83,17 @@ object tpIntegrador {
 		game.addVisualIn(ingeniero,game.at(22,10))
 		game.addVisualIn(manito,game.at(1,12))
 		
-		game.addVisualIn(menuPj.danio(),game.at(1,7))
+		game.addVisualIn(menuPj.danino(),game.at(1,7))
 		game.addVisualIn(menuPj.vida(),game.at(1,5))
 		game.addVisualIn(menuPj.escalado(),game.at(1,4))
 		menuPj.barrasEscopetero()
 		
-		game.addVisualIn(menuPj.danio(),game.at(11,7))
+		game.addVisualIn(menuPj.danino(),game.at(11,7))
 		game.addVisualIn(menuPj.vida(),game.at(11,5))
 		game.addVisualIn(menuPj.escalado(),game.at(11,4))
 		menuPj.barrasFranco()
 		
-		game.addVisualIn(menuPj.danio(),game.at(21,7))
+		game.addVisualIn(menuPj.danino(),game.at(21,7))
 		game.addVisualIn(menuPj.vida(),game.at(21,5))
 		game.addVisualIn(menuPj.escalado(),game.at(21,4))
 		menuPj.barrasIng()
@@ -108,10 +108,10 @@ object tpIntegrador {
 	method menuInstrucciones() {
 		game.clear()
 		game.addVisualIn(z,game.at(6,10))
-		game.addVisualIn(x,game.at(6,7))
+		game.addVisualIn(equis,game.at(6,7))
 		game.addVisualIn(flechitas,game.at(5,13))
 		game.addVisualIn(q,game.at(6,4))
-		game.addVisualIn(disparar,game.at(1,9))
+		game.addVisualIn(disparo,game.at(1,9))
 		game.addVisualIn(habilidad,game.at(4,6))
 		game.addVisualIn(movimiento,game.at(4,12))
 		game.addVisualIn(menu,game.at(0,3))

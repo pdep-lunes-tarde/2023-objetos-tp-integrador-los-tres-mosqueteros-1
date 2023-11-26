@@ -23,22 +23,8 @@ class Bala {
 	}
 	
 	method agregarImagen (){
-		if(direccion==sur){
-			imagen = "balaabajo.png"
-			game.addVisual(self)
-		}
-		if(direccion==norte){
-			imagen = "balaarriba.png"
-			game.addVisual(self)
-		}
-		if(direccion==oeste){
-			imagen = "balaizquierda.png"
-			game.addVisual(self)
-		}
-		if(direccion==este){
-			imagen = "bala.png"
-			game.addVisual(self)	
-		}
+		imagen = "bala" + direccion.nombre() + ".png"
+		game.addVisual(self)
 	}
 	
 	method viajar (pj) {
@@ -56,7 +42,6 @@ class Bala {
 			game.removeVisual(self)
 		}
 	}
-	
 	
 	method image () = imagen
 	

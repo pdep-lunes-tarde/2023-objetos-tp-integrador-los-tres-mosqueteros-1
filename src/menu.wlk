@@ -33,69 +33,60 @@ object manito {
 }
 
 object menuPj {
-	method danio () = new Texto (image="dañoC.png")
+	method danino () = new Texto (image="dañoC.png")
 	method vida () = new Texto (image="vidaC.png")
 	method escalado () = new Texto (image="escaladoC.png")
 	method barrita () = new Texto (image="barraC.png")
+	
+	method generarBarras(posiciones) {
+    posiciones.forEach({ posicion => game.addVisualIn(self.barrita(), posicion)})
+	}
+
+	
 	method barrasEscopetero () {
-		game.addVisualIn(self.barrita(),game.at(4,6))
-		game.addVisualIn(self.barrita(),game.at(5,6))
-		game.addVisualIn(self.barrita(),game.at(6,6))
-		game.addVisualIn(self.barrita(),game.at(7,6))
-		game.addVisualIn(self.barrita(),game.at(8,6))
+		const posiciones = [
+			game.at(4, 6), game.at(5, 6), game.at(6, 6), game.at(7, 6), game.at(8, 6),
+    	    game.at(4, 8), game.at(5, 8), game.at(6, 8),game.at(4, 4), game.at(5, 4)
+    	    ]
 		
-		game.addVisualIn(self.barrita(),game.at(4,8))
-		game.addVisualIn(self.barrita(),game.at(5,8))
-		game.addVisualIn(self.barrita(),game.at(6,8))
-		
-		game.addVisualIn(self.barrita(),game.at(4,4))
-		game.addVisualIn(self.barrita(),game.at(5,4))
+		self.generarBarras(posiciones)
 	}
+
 	method barrasFranco() {
-		game.addVisualIn(self.barrita(),game.at(14,6))
-		game.addVisualIn(self.barrita(),game.at(15,6))
-		
-		game.addVisualIn(self.barrita(),game.at(14,8))
-		game.addVisualIn(self.barrita(),game.at(15,8))
-		game.addVisualIn(self.barrita(),game.at(16,8))
-		game.addVisualIn(self.barrita(),game.at(17,8))
-		game.addVisualIn(self.barrita(),game.at(18,8))
-		
-		game.addVisualIn(self.barrita(),game.at(14,4))
-		game.addVisualIn(self.barrita(),game.at(15,4))
-	}
-	method barrasIng () {
-		game.addVisualIn(self.barrita(),game.at(24,6))
-		game.addVisualIn(self.barrita(),game.at(25,6))
-		game.addVisualIn(self.barrita(),game.at(26,6))
-		
-		game.addVisualIn(self.barrita(),game.at(24,8))
-		
-		game.addVisualIn(self.barrita(),game.at(24,4))
-		game.addVisualIn(self.barrita(),game.at(25,4))
-		game.addVisualIn(self.barrita(),game.at(26,4))
-		game.addVisualIn(self.barrita(),game.at(27,4))
-		game.addVisualIn(self.barrita(),game.at(28,4))
-	}
+    	const posiciones = [
+        	game.at(14, 6), game.at(15, 6),game.at(14, 8), game.at(15, 8), game.at(16, 8), 
+        	game.at(17, 8), game.at(18, 8), game.at(14, 4), game.at(15, 4)
+    		]
+    self.generarBarras(posiciones)
+}
+
+	method barrasIng() {
+    	const posiciones = [
+        	game.at(24, 6), game.at(25, 6), game.at(26, 6), game.at(24, 8),
+        	game.at(24, 4), game.at(25, 4), game.at(26, 4), game.at(27, 4), game.at(28, 4)
+    		]
+    self.generarBarras(posiciones)
+}
+
 }
 
 object corazonesInterfaz {
-	method sacarVida (numero) {
-		if(numero == 5){vidaCinco.sacarCorazon()}
-		if(numero == 4){vidaCuatro.sacarCorazon()}
-		if(numero == 3){vidaTres.sacarCorazon()}
-		if(numero == 2){vidaDos.sacarCorazon()}
-		if(numero == 1){vidaUno.sacarCorazon()}
-		if(numero == 10){vidaTresJ2.sacarCorazon()}
-		if(numero == 9){vidaDosJ2.sacarCorazon()}
-		if(numero == 8){vidaUnoJ2.sacarCorazon()}
+	const vidas = new List()
+
+	method inicializarVidas() {
+		vidas.add(vidaUno)
+		vidas.add(vidaDos)
+		vidas.add(vidaTres)
+		vidas.add(vidaCuatro)
+		vidas.add(vidaCinco)
+		}
+
+	method sacarVida(numero) {
+		vidas.elementAt(numero).sacarCorazon()
 	}
-	method ponerVida (numero) {
-		if(numero == 5){vidaCinco.ponerCorazon()}
-		if(numero == 4){vidaCuatro.ponerCorazon()}
-		if(numero == 3){vidaTres.ponerCorazon()}
-		if(numero == 2){vidaDos.ponerCorazon()}
-		if(numero == 1){vidaUno.ponerCorazon()}
+
+	method ponerVida(numero) {
+		vidas.elementAt(numero).ponerCorazon()
 	}
 }
 
@@ -125,14 +116,14 @@ const vidaTresJ2 = new Corazon (posicion = game.at(29,17))
 const jugar = new Texto (image="jugar.png")
 const instrucciones = new Texto (image="instrucciones.png")
 const salir = new Texto (image="salir.png")
-const disparar = new Texto (image="disparar.png")
+const disparo = new Texto (image="disparar.png")
 const habilidad = new Texto (image="habilidad.png")
 const menu = new Texto (image="menu.png")
 const movimiento = new Texto (image="movimiento.png")
 
 const flechitas = new Texto (image="flechas.png")
 const z = new Texto (image="zGr.png")
-const x = new Texto (image="xGr.png")
+const equis = new Texto (image="xGr.png")
 const q = new Texto (image="qGr.png")
 
 

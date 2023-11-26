@@ -17,7 +17,7 @@ class Personaje  {
 	var property vida
 	var property corazones 
 	var property arma
-	var property habilidad
+	var property ventaja
 	
 	var property habilidadEnCd = false
 	var property cooldownHabilidad
@@ -27,7 +27,7 @@ class Personaje  {
 	
 	const vidaInicial = vida
 	const armaInicial = arma
-	const habilidadInicial = habilidad	
+	const habilidadInicial = ventaja	
 	
 	var property imagenDerecha
 	var property imagenIzquierda
@@ -39,6 +39,14 @@ class Personaje  {
 	var property posicionInicial = position
 
 	method image() = imagen
+	
+	method personajePosX(){
+		return position.x()
+	}
+	
+	method personajePosY(){
+		return position.y()
+	}
 	
 	method siguientePosicion(){ 
 		return direction.siguientePosicion(self)	
@@ -53,7 +61,7 @@ class Personaje  {
 		position = self.siguientePosicion()
 	}
 	
-	method disparar () {
+	method disparar() {
 		if (not armaEnCd) {
 			arma.disparar(self)
 			armaEnCd = true
@@ -141,8 +149,8 @@ class JugadorDos inherits Personaje {
 	}
 }
 
-const escopetero = new Personaje (position=new Posicion (x=0,y=10),vida = 5,corazones=[vidaUno,vidaDos,vidaTres,vidaCuatro,vidaCinco],arma = escopeta,cooldownArma = 3,habilidad = new Trampa(),cooldownHabilidad = 10,imagenDerecha="escopetero derecha.png",imagenIzquierda="escopetero izquierda.png",imagenMenu="escopetero menu1.png")
-const franco = new Personaje (position=new Posicion (x=0,y=10),vida = 2,corazones=[vidaUno,vidaDos],arma = francotirador,cooldownArma = 5,habilidad = new DisparoCertero(),cooldownHabilidad = 15,imagenDerecha="sniper chiquito.png",imagenIzquierda="sniper izquierda.png",imagenMenu="sniper.png")
-const ingeniero = new Personaje (position=new Posicion (x=0,y=10),vida = 3,corazones=[vidaUno,vidaDos,vidaTres],arma = pistola,cooldownArma = 2,habilidad = new Granada(),cooldownHabilidad = 9,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")
-const jugadorUno = new Personaje (position=new Posicion (x=0,y=10),vida=3,corazones=[vidaUno,vidaDos,vidaTres],arma = multi,cooldownArma=1,habilidad=new Granada(),cooldownHabilidad = 9,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")
-const jugadorDos = new JugadorDos (position=new Posicion (x=20,y=10),vida=3,corazones=[vidaUnoJ2,vidaDosJ2,vidaTresJ2],arma = multi,cooldownArma=1,habilidad=new Granada(),cooldownHabilidad = 9,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")
+const escopetero = new Personaje (position=new Posicion (x=0,y=10),vida = 5,corazones=[vidaUno,vidaDos,vidaTres,vidaCuatro,vidaCinco],arma = escopeta,cooldownArma = 3,ventaja = new Trampa(),cooldownHabilidad = 10,imagenDerecha="escopetero derecha.png",imagenIzquierda="escopetero izquierda.png",imagenMenu="escopetero menu1.png")
+const franco = new Personaje (position=new Posicion (x=0,y=10),vida = 2,corazones=[vidaUno,vidaDos],arma = francotirador,cooldownArma = 5,ventaja = new DisparoCertero(),cooldownHabilidad = 15,imagenDerecha="sniper chiquito.png",imagenIzquierda="sniper izquierda.png",imagenMenu="sniper.png")
+const ingeniero = new Personaje (position=new Posicion (x=0,y=10),vida = 3,corazones=[vidaUno,vidaDos,vidaTres],arma = pistola,cooldownArma = 2,ventaja = new Granada(),cooldownHabilidad = 9,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")
+const jugadorUno = new Personaje (position=new Posicion (x=0,y=10),vida=3,corazones=[vidaUno,vidaDos,vidaTres],arma = multi,cooldownArma=1,ventaja=new Granada(),cooldownHabilidad = 9,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")
+const jugadorDos = new JugadorDos (position=new Posicion (x=20,y=10),vida=3,corazones=[vidaUnoJ2,vidaDosJ2,vidaTresJ2],arma = multi,cooldownArma=1,ventaja=new Granada(),cooldownHabilidad = 9,imagenDerecha="ing.png",imagenIzquierda="ingiz.png",imagenMenu="ing menu1.png")

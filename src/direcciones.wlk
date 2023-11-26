@@ -37,26 +37,24 @@ class Posicion {
 class Direccion {
 	var property position = new Posicion (x=0,y=0)
 	var property siguientePos = new Posicion (x=0,y=0)
-		
-	method siguientePosicion (objeto) 
+	var property nombre = "sur"
+			
+	method siguientePosicion (objeto)
 	
-
+	method evitarObstaculos(posicion,siguientePosicion){
+		if(not siguientePos.allElements().filter{elemento => obstaculos.contains(elemento)}.isEmpty()){
+			return position
+		}
+		return siguientePos
+	}
 }
 
-
-
 object sur inherits Direccion {
-	
 	override method siguientePosicion (objeto) {
 		position = objeto.position()
 		siguientePos = new Posicion (x=objeto.position().x(),y=objeto.position().downRelativo().y())
 		
-		if(not siguientePos.allElements().filter{elemento => obstaculos.contains(elemento)}.isEmpty()){
-			return position
-		}
-		
-		return siguientePos
-		
+		return self.evitarObstaculos(position,siguientePos)
 		}	
 }
 
@@ -66,13 +64,11 @@ object norte inherits Direccion {
 		position = objeto.position()
 		siguientePos = new Posicion (x=objeto.position().x(),y=objeto.position().upRelativo().y())
 		
-		if(not siguientePos.allElements().filter{elemento => obstaculos.contains(elemento)}.isEmpty()){
-			return position
-		}
-		
-		return siguientePos
+		return self.evitarObstaculos(position,siguientePos)
 		
 		}	
+		
+	override method nombre() = "norte"
 }
 
 object este inherits Direccion {
@@ -81,26 +77,19 @@ object este inherits Direccion {
 		position = objeto.position()
 		siguientePos = new Posicion (x=objeto.position().rightRelativo().x(),y=objeto.position().y())
 		
-		if(not siguientePos.allElements().filter{elemento => obstaculos.contains(elemento)}.isEmpty()){
-			return position
-		}
-		
-		return siguientePos
+		return self.evitarObstaculos(position,siguientePos)
 		
 		}
+	override method nombre() = "este"
 }
 
 object oeste inherits Direccion {
-
-	    override method siguientePosicion (objeto) {
+	override method siguientePosicion (objeto) {
 		position = objeto.position()
 		siguientePos = new Posicion (x=objeto.position().leftRelativo().x(),y=objeto.position().y())
 		
-		if(not siguientePos.allElements().filter{elemento => obstaculos.contains(elemento)}.isEmpty()){
-			return position
+		return self.evitarObstaculos(position,siguientePos)
+		
 		}
-		
-		return siguientePos
-		
-		}	
+	override method nombre() = "oeste"		
 }
