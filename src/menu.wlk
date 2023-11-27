@@ -71,22 +71,19 @@ object menuPj {
 }
 
 object corazonesInterfaz {
-	const vidas = new List()
-
-	method inicializarVidas() {
-		vidas.add(vidaUno)
-		vidas.add(vidaDos)
-		vidas.add(vidaTres)
-		vidas.add(vidaCuatro)
-		vidas.add(vidaCinco)
-		}
-
-	method sacarVida(numero) {
-		vidas.elementAt(numero).sacarCorazon()
+	method sacarVida (numero) {
+		if(numero == 5){vidaCinco.sacarCorazon()}
+		if(numero == 4){vidaCuatro.sacarCorazon()}
+		if(numero == 3){vidaTres.sacarCorazon()}
+		if(numero == 2){vidaDos.sacarCorazon()}
+		if(numero == 1){vidaUno.sacarCorazon()}
 	}
-
-	method ponerVida(numero) {
-		vidas.elementAt(numero).ponerCorazon()
+	method ponerVida (numero) {
+		if(numero == 5){vidaCinco.ponerCorazon()}
+		if(numero == 4){vidaCuatro.ponerCorazon()}
+		if(numero == 3){vidaTres.ponerCorazon()}
+		if(numero == 2){vidaDos.ponerCorazon()}
+		if(numero == 1){vidaUno.ponerCorazon()}
 	}
 }
 
